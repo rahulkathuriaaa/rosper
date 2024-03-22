@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.hoverUnderline {
+  display: inline-block;
+  position: relative;
+}
+
+.hoverUnderline::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -0.5rem;
+  left: 0;
+  background-color: #00B24F;
+  transform-origin: bottom right;
+  transition: transform 0.5s ease-out;
+}
+
+.hoverUnderline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.hoverUnderlineWhite {
+  display: inline-block;
+  position: relative;
+}
+
+.hoverUnderlineWhite::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  bottom: -0.5rem;
+  left: 0;
+  background-color: #fff;
+  transform-origin: bottom right;
+  transition: transform 0.5s ease-out;
+}
+
+.hoverUnderlineWhite:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}

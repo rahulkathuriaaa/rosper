@@ -1,0 +1,35 @@
+import Image from "next/image";
+import LandingNavbar from "@/components/landing/LandingNavbar";
+import Hero from "@/components/landing/HeroSection";
+import Features from "@/components/landing/FeaturesSection";
+import OfferSection from "@/components/landing/OfferSection";
+import HowItWorks from "@/components/landing/HowItWorks";
+
+export default function Home() {
+  return (
+    <main className="bg-[#111111] flex min-h-screen flex-col items-center justify-between">
+      <div
+        className="bg-cover bg-center w-full h-full"
+        style={{ backgroundImage: "url('/hero-bg.svg')" }}
+      >
+        <LandingNavbar />
+        <Hero />
+      </div>
+      <div
+        className="bg-cover bg-center w-full h-full"
+        style={{ backgroundImage: "url('/landing-bg.png')" }}
+      >
+        <Features />
+      </div>
+      <div
+        className="bg-cover bg-center w-full h-full"
+        style={{ backgroundImage: "url('/landing-bg.png')" }}
+      >
+        <OfferSection />
+      </div>
+      <div>
+        <HowItWorks/>
+      </div>
+    </main>
+  );
+}
