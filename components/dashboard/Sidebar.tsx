@@ -68,7 +68,7 @@ const Sidebar = (props: any) => {
             />
           </span>
 
-          {/* <Link href="/dashboard/settings/brand"> */}
+          <Link href="/dashboard/settings/brand">
             <span
               onClick={() => props.setActivePage("SettingsPage")}
               className="cursor-pointer"
@@ -80,7 +80,7 @@ const Sidebar = (props: any) => {
                 isActive={props.activePage == "SettingsPage"}
               />
             </span>
-          {/* </Link> */}
+          </Link>
         </div>
       </div>
     </div>

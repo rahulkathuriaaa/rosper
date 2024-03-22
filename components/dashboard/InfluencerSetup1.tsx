@@ -16,15 +16,23 @@ function InfluencerSetup1() {
           <p className="text-3xl font-semibold">Influencer Account Setup</p>
           <p>Give your account details</p>
           <div className="ml-2 flex flex-col gap-8">
-            <div className="text-white">
-              <p className="mb-2">Your Picture</p>
-              <Image
-                src="/LogoUpload.svg"
-                width="252"
-                height="300"
-                className="w-[10%]"
-                alt="Ref3r logo"
-              />
+            <div className="text-white  w-[15%]">
+              <label className="mb-2 cursor-pointer">
+                Your Picture
+                <input
+                  type="file"
+                  name="file_upload"
+                  id=""
+                  className="hidden"
+                />
+                <Image
+                  src="/LogoUpload.svg"
+                  width="252"
+                  height="300"
+                  className=""
+                  alt="Ref3r logo"
+                />
+              </label>
             </div>
 
             <div className="flex flex-col w-[70%]">
@@ -33,7 +41,7 @@ function InfluencerSetup1() {
                 type="text"
                 id="event-name"
                 placeholder="Name"
-                className="bg-[#27292D] rounded-xl p-2 text-[#929396]"
+                className="bg-[#27292D] rounded-xl p-2 outline-none"
               />
             </div>
 
@@ -42,7 +50,7 @@ function InfluencerSetup1() {
               <textarea
                 placeholder="Description..."
                 rows={4}
-                className="bg-[#27292D] rounded-xl p-2 text-[#929396] resize-none"
+                className="bg-[#27292D] rounded-xl p-2 outline-none resize-none"
               />
             </div>
             <button

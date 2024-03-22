@@ -16,15 +16,23 @@ function BrandSetup1() {
           <p className="text-3xl font-semibold">Brand Account Setup</p>
           <p>Give your brand details</p>
           <div className="ml-2 flex flex-col gap-4">
-            <div className="">
-              <p className="mb-2">Brand Logo</p>
-              <Image
-                src="/LogoUpload.svg"
-                width="252"
-                height="300"
-                className="w-[10%]"
-                alt="Ref3r logo"
-              />
+            <div className="w-[15%]">
+              <label className="mb-2 cursor-pointer">
+                Brand Logo
+                <input
+                  type="file"
+                  name="file_upload"
+                  id=""
+                  className="hidden"
+                />
+                <Image
+                  src="/LogoUpload.svg"
+                  width="252"
+                  height="300"
+                  className="w-full"
+                  alt="Ref3r logo"
+                />
+              </label>
             </div>
 
             <div className="flex flex-col w-[70%]">
@@ -33,7 +41,7 @@ function BrandSetup1() {
                 type="text"
                 id="event-name"
                 placeholder="Name"
-                className="bg-[#27292D] rounded-xl p-2 text-[#929396]"
+                className="bg-[#27292D] rounded-xl p-2 outline-none"
               />
             </div>
 
@@ -42,17 +50,17 @@ function BrandSetup1() {
               <textarea
                 placeholder="Description..."
                 rows={4}
-                className="bg-[#27292D] rounded-xl p-2 text-[#929396] resize-none"
+                className="bg-[#27292D] rounded-xl p-2 resize-none outline-none"
               />
             </div>
 
             <div className="flex flex-col w-[70%]">
               <label className="mb-2">Website Link</label>
               <input
-                type="text"
+                type="url"
                 id="event-name"
                 placeholder="Link"
-                className="bg-[#27292D] rounded-xl p-2 text-[#929396]"
+                className="bg-[#27292D] rounded-xl p-2 outline-none"
               />
             </div>
 
@@ -62,7 +70,7 @@ function BrandSetup1() {
                 type="text"
                 id="event-name"
                 placeholder="Address"
-                className="bg-[#27292D] rounded-xl p-2 text-[#929396]"
+                className="bg-[#27292D] rounded-xl p-2 outline-none"
               />
             </div>
 
@@ -74,7 +82,7 @@ function BrandSetup1() {
                 type="text"
                 id="event-name"
                 placeholder="Code"
-                className="bg-[#27292D] rounded-xl p-2 text-[#929396]"
+                className="bg-[#27292D] rounded-xl p-2 outline-none"
               />
             </div>
             <button

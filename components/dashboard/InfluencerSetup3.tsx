@@ -24,13 +24,13 @@ function InfluencerSetup3() {
               <input
                 type="text"
                 id="event-name"
-                className="bg-[#27292D] rounded-xl p-2 text-[#929396]"
+                className="bg-[#27292D] rounded-xl p-2 outline-none"
               />
             </div>
 
             <div className="flex flex-col w-[70%]">
               <label className="mb-2">Select your main platform</label>
-              <textarea className="bg-[#27292D] rounded-xl p-2 text-[#929396] resize-none" />
+              <textarea className="bg-[#27292D] rounded-xl p-2 outline-none resize-none" />
             </div>
 
             <div className="flex flex-col w-[70%]">
@@ -40,7 +40,7 @@ function InfluencerSetup3() {
               <input
                 type="text"
                 id="event-name"
-                className="bg-[#27292D] rounded-xl p-2 text-[#929396]"
+                className="bg-[#27292D] rounded-xl p-2 outline-none"
               />
             </div>
             <button

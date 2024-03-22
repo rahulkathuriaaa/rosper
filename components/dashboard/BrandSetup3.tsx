@@ -25,7 +25,7 @@ function BrandSetup3() {
                 type="text"
                 id="event-name"
                 //   placeholder="Name"
-                className="bg-[#27292D] rounded-xl p-2 text-[#929396]"
+                className="bg-[#27292D] rounded-xl p-2 outline-none"
               />
             </div>
 
@@ -33,7 +33,7 @@ function BrandSetup3() {
               <label className="mb-2">Enter your API key from store</label>
               <textarea
                 //   placeholder="Description..."
-                className="bg-[#27292D] rounded-xl p-2 text-[#929396] resize-none"
+                className="bg-[#27292D] rounded-xl p-2 outline-none resize-none"
               />
             </div>
 
@@ -43,7 +43,7 @@ function BrandSetup3() {
                 type="text"
                 id="event-name"
                 //   placeholder="Link"
-                className="bg-[#27292D] rounded-xl p-2 text-[#929396]"
+                className="bg-[#27292D] rounded-xl p-2 outline-none"
               />
             </div>
             <button
