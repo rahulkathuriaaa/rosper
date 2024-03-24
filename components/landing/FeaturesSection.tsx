@@ -12,10 +12,10 @@ function FeaturesSection() {
         Benefits
       </div>
       <div className="w-[90%]">{choose ? <FeatureBrand /> : <FeatureAffiliate />}</div>
-      <div className="flex justify-center items-center gap-2">
+      <div className="flex justify-center items-center gap-6">
         <svg
           className={`w-[40%] cursor-pointer ${
-            choose ? "fill-[#27292D]" : "fill-[#00B24F]"
+            choose ? "fill-[#ffffff69]" : "fill-[#00B24F]"
           }`}
           onClick={() => setChoose(false)}
           width="80"
@@ -29,7 +29,7 @@ function FeaturesSection() {
         </svg>
         <svg
           className={`w-[43%] cursor-pointer ${
-            choose ? "fill-[#00B24F]" : "fill-[#27292D]"
+            choose ? "fill-[#00B24F]" : "fill-[#ffffff69]"
           }`}
           onClick={() => setChoose(true)}
           width="85"

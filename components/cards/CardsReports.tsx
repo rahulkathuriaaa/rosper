@@ -37,7 +37,7 @@ const CardsReports = ({
           </div>
         </div>
 
-        <div className="w-[30%]">
+        <div className="w-[25%]">
           <p className="text-white text-sm">${amount}</p>
         </div>
 
@@ -48,7 +48,7 @@ const CardsReports = ({
           </div>
         </div>
 
-        <div className="w-[15%] flex justify-end">
+        <div className="w-[20%] flex justify-end">
           <p className="text-sm text-[#00B24F]">View</p>
         </div>
       </div>

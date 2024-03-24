@@ -51,7 +51,15 @@ function Reports() {
             <div className='w-[40%]'>
               <p className='text-white text-lg font-semibold'>NAME</p>
             </div>
-            <div className='w-[30%]'>REVENUE GENERATED</div>
+            <div className='w-[25%]'>
+              <p className='text-white text-lg font-semibold'>REVENUE GENERATED</p>
+            </div>
+            <div className='w-[15%]'>
+              <p className='text-white text-lg font-semibold'>STATUS</p>
+            </div>
+            <div className='w-[20%]'>
+              <p className='text-white text-lg font-semibold'>REVENUE GRAPH</p>
+            </div>
           </div>
 
           <CardsReports image={"/icons/ProfileIcon.svg"} name='Jane Cooper' mail='jane.cooper@example.com' amount={"30"} /> 

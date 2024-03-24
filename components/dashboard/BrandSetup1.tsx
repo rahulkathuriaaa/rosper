@@ -95,6 +95,7 @@ function BrandSetup1() {
             </button>
           </div>
         </div>
+        
         <div className="w-[50%] rounded-2xl bg-[#15A145] flex justify-center items-center">
           <Image
             src="/Spaceship.svg"

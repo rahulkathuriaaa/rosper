@@ -32,11 +32,11 @@ function OfferSection() {
             </p>
           </div>
 
-          <Link className="" href="/dashboard">
+          {/* <Link className="" href="/dashboard">
             <button className="bg-[#00B24F] hover:bg-white px-4 py-2 text-[0.8rem] text-white hover:text-black rounded-2xl md:rounded-lg">
               Connect
             </button>
-          </Link>
+          </Link> */}
         </div>
 
         <div
@@ -61,11 +61,11 @@ function OfferSection() {
             </p>
           </div>
 
-          <Link className="" href="/dashboard">
+          {/* <Link className="" href="/dashboard">
             <button className="bg-[#00B24F] hover:bg-white px-4 py-2 text-[0.8rem] text-white hover:text-black rounded-2xl md:rounded-lg">
               Connect
             </button>
-          </Link>
+          </Link> */}
         </div>
 
         <div
