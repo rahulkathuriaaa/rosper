@@ -35,7 +35,7 @@ function BrandSettings() {
     return (
       <div className="w-full flex items-center flex-col gap-6 bg-[#1E2023] min-h-screen py-20">
         <div className="w-[80%] flex flex-col gap-16">
-          <div className="text-white text-8xl font-semibold">Settings</div>
+          <div className="text-white text-6xl font-semibold">Settings</div>
           <SettingsNavBar
             setActivePage={setActivePage}
             activePage={activePage}
