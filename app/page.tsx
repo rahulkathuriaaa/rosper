@@ -1,4 +1,7 @@
+"use client";
 import Image from "next/image";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import LandingNavbar from "@/components/landing/LandingNavbar";
 import Hero from "@/components/landing/HeroSection";
 import Features from "@/components/landing/FeaturesSection";
@@ -12,6 +15,9 @@ export default function Home() {
   console.log(isAuthenticated, "laksjdklfjas")
   return (
     <main className="bg-[#111111] flex min-h-screen flex-col items-center justify-between">
+      <div>
+        <button onClick={() => createUser(key)}>create user</button>
+      </div>
       <div
         className="bg-cover bg-center w-full h-full"
         style={{ backgroundImage: "url('/hero-bg.svg')" }}
