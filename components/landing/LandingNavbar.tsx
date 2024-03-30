@@ -2,10 +2,16 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { DynamicConnectButton, DynamicWidget, getAuthToken, useDynamicContext, useIsLoggedIn } from "@/lib/dynamic"
+
+
 
 function LandingNavbar() {
   const [Toggle, setToggle] = useState(true);
-
+  const { user, authToken, isAuthenticated, setShowAuthFlow, handleLogOut } = useDynamicContext()
+  // const isUserLoggedIn = useIsLoggedIn()
+  // console.log(isUserLoggedIn)
+  if (isAuthenticated) console.log("user payload data", user)
   const handleClick = () => {
     setToggle(!Toggle);
   };
@@ -60,7 +66,7 @@ function LandingNavbar() {
           </div>
 
           <div className="mr-4">
-            <Link href="/" className="">
+            {/* <Link href="/" className="">
               <Image
                 src="/login.svg"
                 width="252"
@@ -68,7 +74,12 @@ function LandingNavbar() {
                 className="w-[70%] md:ml-4 my-2"
                 alt="Ref3r logo"
               />
-            </Link>
+            </Link> */}
+            {/* <DynamicWidget /> */}
+            {/* <DynamicConnectButton> {isAuthenticated ? 'logout' : 'login'}</DynamicConnectButton> */}
+
+            <button className="border px-6 py-2 rounded hover:bg-white hover:text-black" onClick={() => isAuthenticated ? handleLogOut() : setShowAuthFlow(true)}>{isAuthenticated ? "sign out" : "login"}</button>
+
           </div>
         </div>
 
@@ -93,9 +104,8 @@ function LandingNavbar() {
         )}
 
         <div
-          className={`delay-300 md:hidden text-center flex justify-center items-center gap-8 py-12 h-screen bg-black/70 w-full fixed top-[55px] text-white flex-col ${
-            Toggle ? "right-[100%]" : "left-[100%]}"
-          }`}
+          className={`delay-300 md:hidden text-center flex justify-center items-center gap-8 py-12 h-screen bg-black/70 w-full fixed top-[55px] text-white flex-col ${Toggle ? "right-[100%]" : "left-[100%]}"
+            }`}
         >
           <div className="flex flex-col gap-[2rem]  w-[80%]">
             <Link href="/">
