@@ -95,8 +95,12 @@ const DashHome = () => {
                 </div>
               </div>
 
+              {/* <p className="text-white text-2xl font-medium">
+                {data ? data.documents[0].name : "Name"}
+              </p> */}
+
               <p className="text-white text-2xl font-medium">
-                {data ? name : "Name"}
+                {key ? name : "Name"}
               </p>
 
               <p className="text-white text-2xl font-medium">
@@ -104,7 +108,7 @@ const DashHome = () => {
               </p>
               <p className="text-[#909090]">Wallet Address: {walletAddress}</p>
               <p className="text-[#909090]">
-                {data ? data.documents[0].description : "Description"}
+                {key ? userDescription : "Description"}
               </p>
 
               <div className="flex items-center gap-8 bg-[#232528] py-2 px-6 rounded-full w-fit">
