@@ -10,6 +10,7 @@ import {
 import { checkUserType } from "@/appwrite/utils";
 import appwriteService from "@/appwrite/config";
 import { useRouter } from "next/navigation";
+import Chat from "../chat/Chat";
 
 const DashHomeInfuencers = ({
   image,
