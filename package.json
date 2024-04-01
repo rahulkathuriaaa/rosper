@@ -28,6 +28,11 @@
     "zustand": "^4.5.2",
     "viem": "^1.21.4",
     "wagmi": "^1.4.13",
+
+
+
+
+
     "zustand": "^4.5.2"
   },
   "devDependencies": {

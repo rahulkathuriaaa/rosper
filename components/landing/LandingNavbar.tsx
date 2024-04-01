@@ -2,8 +2,12 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+<<<<<<< HEAD
+import { useDynamicContext } from "@/lib/dynamic"
+=======
 import { useRouter } from "next/navigation";
 import appwriteService from "@/appwrite/config";
+>>>>>>> f07b69a (feat:added chat)
 
 import {
   DynamicConnectButton,
@@ -21,10 +25,15 @@ import {
 
 function LandingNavbar() {
   const [Toggle, setToggle] = useState(true);
+<<<<<<< HEAD
+  const [isOpen, setIsOpen] = useState(false);
+  const { user, isAuthenticated, setShowAuthFlow, handleLogOut } = useDynamicContext()
+=======
 
   const router = useRouter();
   const { user, authToken, isAuthenticated, setShowAuthFlow, handleLogOut } =
     useDynamicContext();
+>>>>>>> f07b69a (feat:added chat)
   // const isUserLoggedIn = useIsLoggedIn()
   const userAuthenticated = useIsAuthenticated()
   console.log("is user authenticated", userAuthenticated)
@@ -170,8 +179,49 @@ function LandingNavbar() {
   //   userCheck();
   // }, []);
   const myLoader = () => {
-    return `https://api.dicebear.com/7.x/initials/svg?seed=${user?.firstName}`;
-  };
+    return `https://api.dicebear.com/7.x/initials/svg?seed=${user?.firstName}`
+  }
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log("user payload data", user?.email);
+
+      usePublicKey.setState({ publicKey: user?.email });
+      const key = usePublicKey.getState().publicKey;
+      console.log(key);
+
+      const userCheck = async () => {
+        console.log("key being added", key);
+        const user = await checkUserExist(key);
+        const setup = await checkUserSetup(key);
+        console.log(user);
+        console.log(setup);
+        if (user) {
+          router.push("/dashboard");
+        }
+      };
+
+      userCheck();
+    }
+  }, [isAuthenticated]); // Only re-run when isAuthenticated changes
+
+  //const key = "0x953ed43e99938fDD2B0c91E4521Cccc2762aF70A";
+  //const key = usePublicKey.getState().publicKey;
+  // function updatePublicKey(key: string) {
+  //   usePublicKey.setState({ publicKey: key });
+  // }
+  // updatePublicKey("0x495yg3ed43e99938fDD2B0c91E4521Cccc2762aF70A");
+
+  // useEffect(() => {
+  //   const userCheck = async () => {
+  //     const user = await checkUserExist();
+  //     console.log(user);
+  //     if (user) {
+  //       // router.push("/dashboard");
+  //     }
+  //   };
+  //   userCheck();
+  // }, []);
 
   return (
     <div className="w-full flex justify-center items-center">
@@ -417,8 +467,93 @@ function LandingNavbar() {
             <div className="md:mr-4">icon</div>
           </div>
         </div>
+      </nav >
+    </div >
+=======
+            <button
+              className="border px-6 py-2 rounded hover:bg-white hover:text-black"
+              onClick={() =>
+                isAuthenticated ? handleLogOut() : setShowAuthFlow(true)
+              }
+            >
+              {isAuthenticated ? "sign out" : "login"}
+            </button>
+          </div>
+        </div>
+
+        {Toggle ? (
+          <Image
+            src="/small.svg"
+            alt="menu"
+            width="65"
+            height="30"
+            className="z-0 md:hidden"
+            onClick={handleClick}
+          />
+        ) : (
+          <Image
+            src="/close.png"
+            alt="close"
+            width="20"
+            height="30"
+            className="z-0 md:hidden"
+            onClick={handleClick}
+          />
+        )}
+
+        <div
+          className={`delay-300 md:hidden text-center flex justify-center items-center gap-8 py-12 h-screen bg-black/70 w-full fixed top-[55px] text-white flex-col ${
+            Toggle ? "right-[100%]" : "left-[100%]}"
+          }`}
+        >
+          <div className="flex flex-col gap-[2rem]  w-[80%]">
+            <Link href="/">
+              <p className="hoverUnderline hover:text-[#00B24F]">Home</p>
+            </Link>
+          <div
+            className={`delay-300 md:hidden text-center flex justify-center items-center gap-8 py-12 h-screen bg-black/70 w-full fixed top-[55px] text-white flex-col ${Toggle ? "right-[100%]" : "left-[100%]}"
+              }`}
+          >
+            <div className="flex flex-col gap-[2rem]  w-[80%]">
+              <Link href="/">
+                <p className="hoverUnderline hover:text-[#00B24F]">Home</p>
+              </Link>
+
+            <Link
+              // target="_blank"
+              href="/"
+            >
+              <p className="hoverUnderline hover:text-[#00B24F]">Benefits</p>
+            </Link>
+
+            <Link href="/">
+              <p className="hoverUnderline hover:text-[#00B24F]">
+                What we offer
+              </p>
+            </Link>
+
+            <Link href="/">
+              <p className="hoverUnderline hover:text-[#00B24F]">
+                How it works
+              </p>
+            </Link>
+
+            <Link href="/">
+              <p className="hoverUnderline hover:text-[#00B24F]">
+                Testimonials
+              </p>
+            </Link>
+
+            <Link href="/">
+              <p className="hoverUnderline hover:text-[#00B24F]">Contact us</p>
+            </Link>
+          </div>
+
+          <div className="md:mr-4">icon</div>
+        </div>
       </nav>
     </div>
+>>>>>>> f07b69a (feat:added chat)
   );
 }
 
