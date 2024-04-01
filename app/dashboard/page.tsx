@@ -19,77 +19,81 @@ function Dashboard() {
   const [choose, setChoose] = useState(true);
   const [brand, setBrand] = useState(false);
   const [influencer, setInfluencer] = useState(false);
-  const [isUserExist, setIsUserExist] = useState(false);
+  // const [isUserExist, setIsUserExist] = useState(false);
 
-  async function getInfluencerData(key: string) {
-    const data = await appwriteService.getInfluencerData(key);
-    return data;
-  }
+  // async function getInfluencerData(key: string) {
+  //   const data = await appwriteService.getInfluencerData(key);
+  //   return data;
+  // }
 
-  async function getBrandData(key: string) {
-    const data = await appwriteService.getBrandData(key);
-    return data;
-  }
+  // async function getBrandData(key: string) {
+  //   const data = await appwriteService.getBrandData(key);
+  //   return data;
+  // }
 
-  async function checkUserSetup(key: string) {
-    const brandData = await getBrandData(key);
-    if (brandData.total) {
-      console.log("brand data", brandData);
-      useIsInfluencer.setState({
-        isInfluencer: false,
-      });
-      useBrandData.setState({
-        documentId: brandData.documents[0].$id,
-        key: brandData.documents[0].key,
-        name: brandData.documents[0].name,
-        description: brandData.documents[0].description,
-        website: brandData.documents[0].website,
-        address: brandData.documents[0].address,
-        business_reg_code: brandData.documents[0].business_reg_code,
-        links: brandData.documents[0].links,
-        ecommerce_platform: brandData.documents[0].ecommerce_platform,
-        api_key: brandData.documents[0].api_key,
-        industry: brandData.documents[0].industry,
-        profile_img: brandData.documents[0].profile_img,
-        connections: brandData.documents[0].connections,
-      });
-    }
+  // async function checkUserSetup(key: string) {
+  //   const brandData = await appwriteService.getBrandData(key);
+  //   if (brandData.total) {
+  //     console.log("brand data", brandData);
+  //     useIsInfluencer.setState({
+  //       isInfluencer: false,
+  //     });
+  //     useBrandData.setState({
+  //       documentId: brandData.documents[0].$id,
+  //       key: brandData.documents[0].key,
+  //       name: brandData.documents[0].name,
+  //       description: brandData.documents[0].description,
+  //       website: brandData.documents[0].website,
+  //       address: brandData.documents[0].address,
+  //       business_reg_code: brandData.documents[0].business_reg_code,
+  //       links: brandData.documents[0].links,
+  //       ecommerce_platform: brandData.documents[0].ecommerce_platform,
+  //       api_key: brandData.documents[0].api_key,
+  //       industry: brandData.documents[0].industry,
+  //       profile_img: brandData.documents[0].profile_img,
+  //       connections: brandData.documents[0].connections,
+  //     });
+  //   }
 
-    const influencerData = await getInfluencerData(key);
-    if (influencerData.total) {
-      console.log(influencerData);
-      useIsInfluencer.setState({
-        isInfluencer: true,
-      });
-      useInfluencerData.setState({
-        documentId: influencerData.documents[0].$id,
-        key: influencerData.documents[0].key,
-        name: influencerData.documents[0].name,
-        bio: influencerData.documents[0].bio,
-        links: influencerData.documents[0].links,
-        niche: influencerData.documents[0].niche,
-        main_platform: influencerData.documents[0].main_platform,
-        follower_count: influencerData.documents[0].follower_count,
-        connections: influencerData.documents[0].connections,
-      });
-    }
+  //   const influencerData = await getInfluencerData(key);
+  //   if (influencerData.total) {
+  //     console.log(influencerData);
+  //     useIsInfluencer.setState({
+  //       isInfluencer: true,
+  //     });
+  //     useInfluencerData.setState({
+  //       documentId: influencerData.documents[0].$id,
+  //       key: influencerData.documents[0].key,
+  //       name: influencerData.documents[0].name,
+  //       bio: influencerData.documents[0].bio,
+  //       links: influencerData.documents[0].links,
+  //       niche: influencerData.documents[0].niche,
+  //       main_platform: influencerData.documents[0].main_platform,
+  //       follower_count: influencerData.documents[0].follower_count,
+  //       connections: influencerData.documents[0].connections,
+  //     });
+  //   }
 
-    if (brandData.total || influencerData.total) {
-      return true;
-    }
-  }
+  //   if (brandData.total || influencerData.total) {
+  //     return true;
+  //   }
+  // }
 
-  useEffect(() => {
-    const userCheck = async () => {
-      const user = await checkUserSetup(key);
-      console.log(user);
-      if (user) {
-        setIsUserExist(true);
-        //router.push("/dashboard");
-      }
-    };
-    userCheck();
-  }, []);
+  // if (useBrandData.getState().key || useInfluencerData.getState().key) {
+  //   setIsUserExist(true);
+  // }
+
+  // useEffect(() => {
+  //   const userCheck = async () => {
+  //     const user = await checkUserSetup(key);
+  //     console.log(user);
+  //     if (user) {
+  //       setIsUserExist(true);
+  //       //router.push("/dashboard");
+  //     }
+  //   };
+  //   userCheck();
+  // }, []);
 
   return (
     <>
@@ -173,3 +177,5 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
+//  {isUserExist ? <DashboardComponent /> : ""}

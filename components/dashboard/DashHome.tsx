@@ -102,6 +102,10 @@ const DashHome = () => {
               <p className="text-white text-2xl font-medium">
                 {key ? name : "Name"}
               </p>
+
+              <p className="text-white text-2xl font-medium">
+                {key ? name : "Name"}
+              </p>
               <p className="text-[#909090]">Wallet Address: {walletAddress}</p>
               <p className="text-[#909090]">
                 {key ? userDescription : "Description"}
@@ -228,7 +232,8 @@ const DashHome = () => {
                       image={`Influencer1.svg`}
                       name={e.name}
                       currentUserDocumentId={currentUserDocumentId}
-                      cardDocumentId={e.$collectionId}
+                      cardDocumentId={e.$id}
+                      cardUserKey={e.key}
                     />
                   ))
                 ) : (
