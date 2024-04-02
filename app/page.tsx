@@ -4,6 +4,7 @@ import Hero from "@/components/landing/HeroSection";
 import Features from "@/components/landing/FeaturesSection";
 import OfferSection from "@/components/landing/OfferSection";
 import HowItWorks from "@/components/landing/HowItWorks";
+import Footer from "@/components/landing/Footer";
 
 export default function Home() {
   return (
@@ -28,7 +29,10 @@ export default function Home() {
         <OfferSection />
       </div>
       <div>
-        <HowItWorks/>
+        <HowItWorks />
+      </div>
+      <div className="w-full">
+        <Footer />
       </div>
     </main>
   );
