@@ -9,11 +9,11 @@ function BrandSetup1() {
   return (
     <>
       <div
-        className={`w-[90%] flex justify-center items-center gap-10 my-10 ${
+        className={`w-[90%] justify-center gap-10 ${
           choose ? "flex" : "hidden"
         } `}
       >
-        <div className="w-[50%] text-white flex flex-col gap-4">
+        <div className="w-[50%] text-white flex flex-col gap-4 my-10">
           <p className="text-3xl font-semibold">Brand Account Setup</p>
           <p>Give your brand details</p>
           <div className="ml-2 flex flex-col gap-4">
@@ -97,7 +97,7 @@ function BrandSetup1() {
           </div>
         </div>
         
-        <div className="w-[50%] rounded-2xl bg-[#15A145] flex justify-center items-center">
+        <div className="w-[50%] h-[94vh] top-[3%] sticky rounded-2xl bg-[#15A145] flex justify-center items-center">
           <Image
             src="/Spaceship.svg"
             width="252"

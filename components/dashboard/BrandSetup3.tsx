@@ -45,7 +45,7 @@ function BrandSetup3() {
               />
             </div>
             <button
-              className="bg-[#00B24F] p-4 text-white rounded-2xl md:rounded-lg w-[30%]"
+              className="bg-[#00B24F] px-4 py-2 text-white rounded-xl w-[30%]"
               onClick={() => {
                 setChoose(false);
               }}
