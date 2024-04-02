@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import DashboardComponent from "./DashboardComponent";
-import Dashboard from "@/app/dashboard/page";
 
 function BrandSetup3() {
   const [choose, setChoose] = useState(true);

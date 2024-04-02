@@ -5,6 +5,7 @@ import BrandSetup2 from "./BrandSetup2";
 
 function BrandSetup1() {
   const [choose, setChoose] = useState(true);
+  
   return (
     <>
       <div
