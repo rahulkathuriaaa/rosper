@@ -5,9 +5,10 @@ import "./globals.css";
 import {
   DynamicContextProvider,
   EthereumWalletConnectors,
+  ZeroDevSmartWalletConnectors
 } from "../lib/dynamic"
-
 const inter = Inter({ subsets: ["latin"] });
+
 
 export const metadata: Metadata = {
   title: "Ref3R",
@@ -26,7 +27,7 @@ export default function RootLayout({
         <DynamicContextProvider
           settings={{
             environmentId: process.env.DYNAMIC_PROJECT_ID || '',
-            walletConnectors: [EthereumWalletConnectors]
+            walletConnectors: [EthereumWalletConnectors, ZeroDevSmartWalletConnectors]
           }}
         >
           {children}
