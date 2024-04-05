@@ -13,11 +13,14 @@
     "@dynamic-labs/ethereum-aa": "^1.4.4",
     "@dynamic-labs/ethers-v5": "^1.4.3",
     "@dynamic-labs/sdk-react-core": "^1.4.3",
+    "@dynamic-labs/wagmi-connector": "^1.4.4",
     "@zerodev/sdk": "^5.2.0-alpha-4",
     "next": "14.1.0",
     "pino-pretty": "^11.0.0",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "viem": "^1.21.4",
+    "wagmi": "^1.4.13"
   },
   "devDependencies": {
     "@types/node": "^20",

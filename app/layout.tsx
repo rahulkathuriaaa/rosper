@@ -5,7 +5,9 @@ import "./globals.css";
 import {
   DynamicContextProvider,
   EthereumWalletConnectors,
-  ZeroDevSmartWalletConnectors
+  EthersExtension,
+  ZeroDevSmartWalletConnectors,
+  DynamicWagmiConnector
 } from "../lib/dynamic"
 const inter = Inter({ subsets: ["latin"] });
 
@@ -27,10 +29,13 @@ export default function RootLayout({
         <DynamicContextProvider
           settings={{
             environmentId: process.env.DYNAMIC_PROJECT_ID || '',
-            walletConnectors: [EthereumWalletConnectors, ZeroDevSmartWalletConnectors]
+            walletConnectors: [EthereumWalletConnectors, ZeroDevSmartWalletConnectors],
+            walletConnectorExtensions: [EthersExtension]
           }}
         >
-          {children}
+          <DynamicWagmiConnector>
+            {children}
+          </DynamicWagmiConnector>
         </DynamicContextProvider>
       </body>
     </html>
