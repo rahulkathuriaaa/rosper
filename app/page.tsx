@@ -47,6 +47,9 @@ export default function Home() {
   }, []);
   return (
     <main className="bg-[#111111] flex min-h-screen flex-col items-center justify-between">
+      <div>
+        <button onClick={() => createUser(key)}>create user</button>
+      </div>
       <div
         className="bg-cover bg-center w-full h-full"
         style={{ backgroundImage: "url('/hero-bg.svg')" }}
