@@ -10,7 +10,7 @@ type InfluencerData = {
   niche: string;
   main_platform: string;
   follower_count: number;
-  connections:string
+  connections: string;
   //   setKey: (key: string) => void;
   //   setName: (name: string) => void;
   //   setBio: (bio: string) => void;
@@ -33,7 +33,7 @@ type BrandData = {
   api_key: string;
   industry: string;
   profile_img: string;
-  connections:string
+  connections: string;
 };
 
 type PublicKey = {
@@ -65,7 +65,7 @@ export const useInfluencerData = create<InfluencerData>((set) => ({
   niche: "",
   main_platform: "",
   follower_count: 0,
-  connections:"",
+  connections: "",
   setKey: (key: string) => {
     set(() => ({ key: key }));
   },
@@ -90,7 +90,7 @@ export const useBrandData = create<BrandData>((set) => ({
   api_key: "",
   industry: "",
   profile_img: "",
-  connections:"",
+  connections: "",
   setKey: (key: string) => {
     set(() => ({ key: key }));
   },

@@ -12,6 +12,7 @@ import {
   useInfluencerData,
   useIsInfluencer,
 } from "@/store";
+import { useUserActions } from "@/hooks/useUserActions";
 
 function LandingNavbar() {
   const [Toggle, setToggle] = useState(true);
@@ -191,6 +192,11 @@ function LandingNavbar() {
   const myLoader = () => {
     return `https://api.dicebear.com/7.x/initials/svg?seed=${user?.firstName}`;
   };
+
+  const handleClick = () => {
+    setToggle(!Toggle);
+  };
+
   return (
     <div className="w-full flex justify-center items-center">
       <nav className="z-10 md:bg-[#4A4A4A] mt-2 md:mt-10 w-[90%] rounded-md items-center justify-between text-[0.75rem] lg:text-sm font-semibold text-white flex">
