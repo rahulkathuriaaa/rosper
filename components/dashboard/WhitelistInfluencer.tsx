@@ -5,17 +5,17 @@ import CardsWhitelistInfluencer from "../cards/CardsWhitelistInfluencer";
 function WhitelistInfluencer() {
   return (
     <>
-      <div className="w-[98%] flex flex-col gap-2 py-6 pl-4">
-        <div>
-          <h2>Whitelist Influencers</h2>
-          <p>
+      <div className="w-[98%] flex flex-col gap-10 py-6 pl-4">
+        <div className="flex flex-col gap-2">
+          <h2 className="text-white text-5xl font-semibold">Whitelist Influencers</h2>
+          <p className="text-[#909090] text-sm font-medium">
             Allot upfront budget to influencers you like and we will send them
             request to join the campaign
           </p>
         </div>
 
-        <div>
-          <p>Search</p>
+        <div className="flex flex-col gap-2">
+          <p className="text-[#909090] text-xl">Search</p>
           <div className="flex">
             <div className="flex items-center text-white border-white w-[60%] bg-[#27292D]  rounded-xl px-2 gap-3">
               <Image
@@ -35,9 +35,9 @@ function WhitelistInfluencer() {
         </div>
 
         <div>
-          <div className="flex justify-between">
+          <div className="flex justify-between text-white text-lg font-semibold">
             <div className="flex gap-4">
-              <p>Sort by</p>
+              <p>Sort by:</p>
               <p>Popularity</p>
             </div>
             <div>
