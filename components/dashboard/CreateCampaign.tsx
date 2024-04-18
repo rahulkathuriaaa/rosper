@@ -3,13 +3,9 @@ import { useState } from "react";
 import WhitelistInfluencer from "./WhitelistInfluencer";
 
 function CreateCampaign() {
-  const [choose, setChoose] = useState(true);
-
   return (
     <>
-      <div
-        className={`w-[98%] flex gap-2 py-6 pl-4 ${choose ? "flex" : "hidden"}`}
-      >
+      <div className={`w-[98%] flex gap-2 py-6 pl-4`}>
         <div className="w-[50%] text-white flex flex-col gap-4">
           <h1 className="text-4xl font-bold">Create Campaigns</h1>
 
@@ -64,18 +60,12 @@ function CreateCampaign() {
             />
           </div>
 
-          <button
-            className="py-3 bg-[#00B24F] text-white text-sm text-center w-[35%] rounded-lg cursor-pointer"
-            onClick={() => {
-              setChoose(false);
-            }}
-          >
-            Whitelist Influencer
+          <button className="py-3 bg-[#00B24F] text-white text-sm text-center w-[35%] rounded-lg cursor-pointer">
+            Create Campaign
           </button>
         </div>
         <div className="w-[50%] rounded-2xl bg-[#15A145] flex justify-center items-center h-[90vh]"></div>
       </div>
-      {choose ? "" : <WhitelistInfluencer />}
     </>
   );
 }
