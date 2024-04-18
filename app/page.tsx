@@ -5,8 +5,11 @@ import Features from "@/components/landing/FeaturesSection";
 import OfferSection from "@/components/landing/OfferSection";
 import HowItWorks from "@/components/landing/HowItWorks";
 import Footer from "@/components/landing/Footer";
+import { useIsAuthenticated } from "@/hooks/test";
 
 export default function Home() {
+  const isAuthenticated = useIsAuthenticated
+  console.log(isAuthenticated, "laksjdklfjas")
   return (
     <main className="bg-[#111111] flex min-h-screen flex-col items-center justify-between">
       <div

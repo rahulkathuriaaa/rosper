@@ -4,12 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import DashHomeInfuencers from "../cards/DashHomeInfuencers";
 import CardsProductForBrands from "../cards/CardsProductForBrands";
-
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core"
 const DashHome = () => {
   const [loading, setLoading] = useState(false);
-
+  const { user } = useDynamicContext()
   if (loading == true) return <>Fetching....</>;
-
+  const walletAddress = user?.verifiedCredentials[0].address
   return (
     <div className="flex w-[98%] py-4">
       <div className="flex flex-col justify-center items-center gap-8 w-full">
@@ -48,7 +48,7 @@ const DashHome = () => {
               </div>
 
               <p className="text-white text-2xl font-medium">Brand Name</p>
-
+              <p className="text-[#909090]">Wallet Address: {walletAddress}</p>
               <p className="text-[#909090]">
                 Lorem ipsum dolor sit amet consectetur. Lectus scelerisque ac
                 sollicitudin nibh consequat neque senectus quis. Volutpat
@@ -112,7 +112,7 @@ const DashHome = () => {
             </div>
           </div>
 
-          <div className="w-[25%] h-full"> 
+          <div className="w-[25%] h-full">
             <Image
               src={`/TotalSales.svg`}
               width="425"

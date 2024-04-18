@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useDynamicContext } from "@/lib/dynamic"
-
-
+import { useIsAuthenticated } from "@/hooks/test";
 function LandingNavbar() {
   const [Toggle, setToggle] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
   const { user, isAuthenticated, setShowAuthFlow, handleLogOut } = useDynamicContext()
   // const isUserLoggedIn = useIsLoggedIn()
+  const userAuthenticated = useIsAuthenticated()
+  console.log("is user authenticated", userAuthenticated)
   // console.log(isUserLoggedIn)
   if (isAuthenticated) console.log("user payload data", user)
   const handleClick = () => {
