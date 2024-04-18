@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import DashboardComponent from "./DashboardComponent";
+import InfluencerDashComponent from "./InfluencerDashboard/InfluencerDashComponent";
 
 function InfluencerSetup3() {
   const [choose, setChoose] = useState(true);
@@ -63,7 +64,7 @@ function InfluencerSetup3() {
           />
         </div>
       </div>
-      {choose ? "" : <DashboardComponent />}
+      {choose ? "" : <InfluencerDashComponent />}
     </>
   );
 }
