@@ -33,7 +33,7 @@ function Dashboard() {
               <div className="text-4xl font-semibold">
                 Who do you want to sign up as?
               </div>
-              <p>We'll personalize your setup experience accordingly.</p>
+              <p>We&apos;ll personalize your setup experience accordingly.</p>
             </div>
             <div className="flex w-[50%] justify-center items-center gap-[20%]">
               <div

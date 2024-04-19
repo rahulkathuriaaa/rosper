@@ -9,14 +9,14 @@ export default function Chat(room: any) {
   return (
     <div className="chat-container">
       <div className="chat-header">
-        <div className="title">Let's Chat</div>
+        <div className="title">Let &apos;s Chat</div>
         <button onClick={() => router.push("/")} className="leave">
           Leave Chat
         </button>
       </div>
 
       <div className="chat-body">
-        {messages?.map((message, index) => (
+        {messages?.map((message: any, index: any) => (
           <div key={index}>
             <span className="name">{message.name}:</span>
             {message.messages}

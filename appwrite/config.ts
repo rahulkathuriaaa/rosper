@@ -1,4 +1,5 @@
 import conf from "@/conf/config";
+// @ts-ignore
 import { Query, Client, Account, ID, Databases, Storage } from "appwrite";
 
 const appwriteClient = new Client();

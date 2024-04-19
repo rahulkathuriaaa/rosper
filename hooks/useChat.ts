@@ -1,4 +1,4 @@
-// useChat.ts
+// @ts-nocheck 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { appwriteApi } from "@/appwrite/config";

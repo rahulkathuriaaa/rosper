@@ -1,3 +1,4 @@
+// @ts-nocheck 
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -14,7 +15,7 @@ import {
   usePublicKey,
 } from "@/store";
 
-import { useDynamicContext } from "@dynamic-labs/sdk-react-core"
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 const DashHome = () => {
   const isInfluencer = useIsInfluencer((state) => state.isInfluencer);
   console.log(isInfluencer);
@@ -58,9 +59,9 @@ const DashHome = () => {
     updateData(key);
   }, []);
 
-  const { user } = useDynamicContext()
+  const { user } = useDynamicContext();
   if (loading == true) return <>Fetching....</>;
-  const walletAddress = user?.verifiedCredentials[0].address
+  const walletAddress = user?.verifiedCredentials[0].address;
   return (
     <div className="flex w-[98%] py-4">
       <div className="flex flex-col justify-center items-center gap-8 w-full">
@@ -106,7 +107,6 @@ const DashHome = () => {
                 {key ? name : "Name"}
               </p>
 
-              
               <p className="text-[#909090]">Wallet Address: {walletAddress}</p>
               <p className="text-[#909090]">
                 {key ? userDescription : "Description"}
@@ -235,6 +235,7 @@ const DashHome = () => {
                       name={e.name}
                       currentUserDocumentId={currentUserDocumentId}
                       cardDocumentId={e.$id}
+                      key={e.$id}
                       cardUserKey={e.key}
                     />
                   ))

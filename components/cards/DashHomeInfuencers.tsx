@@ -11,7 +11,15 @@ import { checkUserType } from "@/appwrite/utils";
 import appwriteService from "@/appwrite/config";
 import { useRouter } from "next/navigation";
 
-const DashHomeInfuencers = ({
+type DashHomeInfuencersProps = {
+  image: string;
+  name: string;
+  currentUserDocumentId: string;
+  cardDocumentId: string;
+  cardUserKey: string;
+};
+
+const DashHomeInfuencers : React.FC<DashHomeInfuencersProps>= ({
   image,
   name,
   currentUserDocumentId,
@@ -38,7 +46,7 @@ const DashHomeInfuencers = ({
   const updateConnections = async () => {
     setIsLoading(true);
 
-    const updateUserConnections = async (documentId, key, otherUserKey) => {
+    const updateUserConnections = async (documentId:string, key:string, otherUserKey:string) => {
       const userType = await checkUserType(key);
       const updateFn =
         userType === "brand"
