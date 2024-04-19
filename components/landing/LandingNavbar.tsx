@@ -121,7 +121,6 @@ function LandingNavbar() {
   //   userCheck();
   // }
 
-
   useEffect(() => {
     if (isAuthenticated) {
       console.log("user payload data", user?.email);
@@ -162,7 +161,6 @@ function LandingNavbar() {
   //   };
   //   userCheck();
   // }, []);
-
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -363,14 +361,14 @@ function LandingNavbar() {
                 </div>
               </div>
             ) : (
-              
+              <Link href="/dashboard">
                 <button
                   className="border px-6 py-2 rounded hover:bg-white hover:text-black"
                   onClick={() => setShowAuthFlow(true)}
                 >
-                  Launch Dapp
+                  Launch App
                 </button>
-        
+              </Link>
             )}
           </div>
 
@@ -394,15 +392,15 @@ function LandingNavbar() {
             />
           )}
 
-        <div
-          className={`delay-300 md:hidden text-center flex justify-center items-center gap-8 py-12 h-screen bg-black/70 w-full fixed top-[55px] text-white flex-col ${
-            Toggle ? "right-[100%]" : "left-[100%]}"
-          }`}
-        >
-          <div className="flex flex-col gap-[2rem]  w-[80%]">
-            <Link href="/">
-              <p className="hoverUnderline hover:text-[#00B24F]">Home</p>
-            </Link>
+          <div
+            className={`delay-300 md:hidden text-center flex justify-center items-center gap-8 py-12 h-screen bg-black/70 w-full fixed top-[55px] text-white flex-col ${
+              Toggle ? "right-[100%]" : "left-[100%]}"
+            }`}
+          >
+            <div className="flex flex-col gap-[2rem]  w-[80%]">
+              <Link href="/">
+                <p className="hoverUnderline hover:text-[#00B24F]">Home</p>
+              </Link>
 
               <Link
                 // target="_blank"
@@ -439,10 +437,8 @@ function LandingNavbar() {
             <div className="md:mr-4">icon</div>
           </div>
         </div>
-      </nav >
-    </div >
-
-           
+      </nav>
+    </div>
   );
 }
 
