@@ -39,6 +39,7 @@ export function useChat(room: string) {
 
     async function getMessages() {
       const prevMessages = await appwriteService.getMessages(result[1] + result[2]);
+      console.log(prevMessages)
       setMessages(prevMessages.documents);
     }
 
