@@ -10,6 +10,7 @@ import {
 import { checkUserType } from "@/appwrite/utils";
 import appwriteService from "@/appwrite/config";
 import { useRouter } from "next/navigation";
+import ChatPop from "../dashboard/ChatPop";
 
 type DashHomeInfuencersProps = {
   image: string;
@@ -19,7 +20,7 @@ type DashHomeInfuencersProps = {
   cardUserKey: string;
 };
 
-const DashHomeInfuencers : React.FC<DashHomeInfuencersProps>= ({
+const DashHomeInfuencers: React.FC<DashHomeInfuencersProps> = ({
   image,
   name,
   currentUserDocumentId,
@@ -46,7 +47,11 @@ const DashHomeInfuencers : React.FC<DashHomeInfuencersProps>= ({
   const updateConnections = async () => {
     setIsLoading(true);
 
-    const updateUserConnections = async (documentId:string, key:string, otherUserKey:string) => {
+    const updateUserConnections = async (
+      documentId: string,
+      key: string,
+      otherUserKey: string
+    ) => {
       const userType = await checkUserType(key);
       const updateFn =
         userType === "brand"
@@ -73,11 +78,15 @@ const DashHomeInfuencers : React.FC<DashHomeInfuencersProps>= ({
     setIsLoading(false);
   };
 
+  // const handleMessageClick = () => {
+  //   const room = `${currentUserDocumentId}-${cardDocumentId}`;
+  //   console.log("huiiii");
+  //   return <ChatPop room={room} />;
+  // };
+  const [isChatOpen, setIsChatOpen] = useState(false);
+
   const handleMessageClick = () => {
-    const chatUrl = useIsInfluencer.getState().isInfluencer
-      ? `/chat/${currentUserKey}-${cardUserKey}-${currentUserKey}`
-      : `/chat/${currentUserKey}-${currentUserKey}-${cardUserKey}`;
-    router.push(chatUrl);
+    setIsChatOpen(!isChatOpen);
   };
 
   return (
@@ -91,12 +100,17 @@ const DashHomeInfuencers : React.FC<DashHomeInfuencersProps>= ({
       />
       <p className="text-white text-lg font-medium">{name}</p>
       {isConnected ? (
-        <button
-          onClick={handleMessageClick}
-          className="rounded bg-[#00B24F] text-white px-2 py-1 text-sm"
-        >
-          Message
-        </button>
+        <>
+          <button
+            onClick={handleMessageClick}
+            className="rounded bg-[#00B24F] text-white px-2 py-1 text-sm"
+          >
+            Message
+          </button>
+          {isChatOpen && (
+            <ChatPop room={`${currentUserDocumentId}-${cardDocumentId}`} />
+          )}
+        </>
       ) : (
         <button
           onClick={updateConnections}

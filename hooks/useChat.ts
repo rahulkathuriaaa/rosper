@@ -1,38 +1,26 @@
-// @ts-nocheck 
+// @ts-nocheck
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { appwriteApi } from "@/appwrite/config";
 import appwriteService from "@/appwrite/config";
 import conf from "@/conf/config";
 
 export function useChat(room: string) {
-  const [nameID, setNameID] = useState<string>();
-  const [roomID, setRoomID] = useState<string>();
-  const [messages, setMessages] = useState<any>();
-  const [currMessage, setCurrMessage] = useState<string>();
-  const router = useRouter();
+  const [nameID, setNameID] = useState<string>("");
+  const [messages, setMessages] = useState<any>([]);
+  const [currMessage, setCurrMessage] = useState<string>("");
 
   useEffect(() => {
     const result = room.replace(/%40/g, "@").split("-");
     const key = result[0];
 
     async function updateData() {
-      console.log(key);
-      setRoomID(result[1] + result[2]);
-      console.log(result[1] + "-" + result[2]);
-
       if (result[0] === result[2]) {
         const data = await appwriteService.getInfluencerData(key);
         setNameID(data.documents[0].name);
-        console.log(data.documents[0].name);
       } else if (result[0] === result[1]) {
         const data = await appwriteService.getBrandData(key);
         setNameID(data.documents[0].name);
-        console.log(data);
       }
-
-      const data = await appwriteService.getCurrentUser();
-      console.log(data);
     }
 
     updateData();
@@ -66,7 +54,7 @@ export function useChat(room: string) {
     const name = nameID;
     const chatObj = {
       name: name,
-      room: roomID,
+      room: room.replace(/%40/g, "@"),
       messages: message,
     };
     setCurrMessage("");
@@ -76,11 +64,9 @@ export function useChat(room: string) {
 
   return {
     nameID,
-    roomID,
     messages,
     currMessage,
     setCurrMessage,
     sendMessage,
-    router,
   };
 }

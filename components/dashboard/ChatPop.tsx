@@ -1,9 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import { useChat } from "../../hooks/useChat";
 
-const ChatPop = () => {
+const ChatPop = ({ room }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const { nameID, messages, currMessage, setCurrMessage, sendMessage } =
+    useChat(room);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -48,72 +51,62 @@ const ChatPop = () => {
             <div className="h-[60vh] bg-black flex flex-col w-full py-4 gap-10">
               <div className="h-[40vh] overflow-auto flex justify-center w-full">
                 <div className="flex flex-col items-center w-[75%] gap-6">
-                  <div className="w-full flex justify-start gap-4">
-                    <Image
-                      src={"/profile.svg"}
-                      width={30}
-                      height={30}
-                      alt="go"
-                      className="rounded-full"
-                    />
-                    <p className="text-start p-2 max-w-[50%] border border-[#C6FFE6] bg-[#27292D] rounded-xl text-sm text-[#00B24F]">
-                      Lorem Ipsum has been the industrys standard dummy text
-                      ever since the 1500s,
-                    </p>
-                  </div>
-
-                  <div className="w-full flex justify-end gap-4">
-                    <p className="text-start p-2 max-w-[50%] border border-[#00B24F] bg-[#00B24F] rounded-xl text-sm text-white">
-                      Lorem Ipsum has been the industrys standard dummy text
-                      ever since the 1500s,
-                    </p>
-                    <Image
-                      src={"/profile.svg"}
-                      width={30}
-                      height={30}
-                      alt="go"
-                      className="rounded-full"
-                    />
-                  </div>
-                  <div className="w-full flex justify-start gap-4">
-                    <Image
-                      src={"/profile.svg"}
-                      width={30}
-                      height={30}
-                      alt="go"
-                      className="rounded-full"
-                    />
-                    <p className="text-start p-2 max-w-[50%] border border-[#C6FFE6] bg-[#27292D] rounded-xl text-sm text-[#00B24F]">
-                      Lorem Ipsum has been the industrys standard dummy text
-                      ever since the 1500s,
-                    </p>
-                  </div>
-
-                  <div className="w-full flex justify-end gap-4">
-                    <p className="text-start p-2 max-w-[50%] border border-[#00B24F] bg-[#00B24F] rounded-xl text-sm text-white">
-                      Lorem Ipsum has been the industrys standard dummy text
-                      ever since the 1500s,
-                    </p>
-                    <Image
-                      src={"/profile.svg"}
-                      width={30}
-                      height={30}
-                      alt="go"
-                      className="rounded-full"
-                    />
-                  </div>
+                  {messages?.map((message, index) => (
+                    <div
+                      key={index}
+                      className={`w-full flex ${
+                        message.name === nameID
+                          ? "justify-end"
+                          : "justify-start"
+                      } gap-4`}
+                    >
+                      {message.name !== nameID && (
+                        <Image
+                          src={"/profile.svg"}
+                          width={30}
+                          height={30}
+                          alt="go"
+                          className="rounded-full"
+                        />
+                      )}
+                      <p
+                        className={`text-start p-2 max-w-[50%] border ${
+                          message.name === nameID
+                            ? "border-[#00B24F] bg-[#00B24F] text-white"
+                            : "border-[#C6FFE6] bg-[#27292D] text-[#00B24F]"
+                        } rounded-xl text-sm`}
+                      >
+                        {message.messages}
+                      </p>
+                      {message.name === nameID && (
+                        <Image
+                          src={"/profile.svg"}
+                          width={30}
+                          height={30}
+                          alt="go"
+                          className="rounded-full"
+                        />
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
 
               <div className="flex justify-center items-center">
-                <div className="flex justify-between text-start p-2 w-[70%] border border-[#C6FFE6] bg-[#27292D] rounded-xl text-sm text-[#00B24F]">
-                  <p className="pl-2 max-w-[50%] text-[#DBDBDB]">
-                    Type Your Message......
-                  </p>
-                  <div>
-                    <button>Send</button>
-                  </div>
-                </div>
+                <form
+                  onSubmit={sendMessage}
+                  className="flex justify-between text-start p-2 w-[70%] border border-[#C6FFE6] bg-[#27292D] rounded-xl text-sm text-[#00B24F]"
+                >
+                  <input
+                    value={currMessage}
+                    onChange={(e) => setCurrMessage(e.target.value)}
+                    type="text"
+                    name="message"
+                    placeholder="Type Your Message......"
+                    className="pl-2 max-w-[50%] text-[#DBDBDB] bg-transparent outline-none"
+                  />
+                  <button type="submit">Send</button>
+                </form>
               </div>
             </div>
           </div>
