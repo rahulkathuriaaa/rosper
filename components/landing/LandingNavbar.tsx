@@ -363,14 +363,14 @@ function LandingNavbar() {
                 </div>
               </div>
             ) : (
-              <Link href="/dashboard">
+              
                 <button
                   className="border px-6 py-2 rounded hover:bg-white hover:text-black"
                   onClick={() => setShowAuthFlow(true)}
                 >
                   Launch Dapp
                 </button>
-              </Link>
+        
             )}
           </div>
 
