@@ -21,8 +21,8 @@ function LandingNavbar() {
   const { user, isAuthenticated, setShowAuthFlow, handleLogOut } =
     useDynamicContext();
   // const isUserLoggedIn = useIsLoggedIn()
-  const userAuthenticated = useIsAuthenticated()
-  console.log("is user authenticated", userAuthenticated)
+  // const userAuthenticated = useIsAuthenticated()
+  // console.log("is user authenticated", userAuthenticated)
   // console.log(isUserLoggedIn)
   async function createUser(key: string) {
     const user = await appwriteService.createUserAccount(key);
@@ -120,9 +120,7 @@ function LandingNavbar() {
   //   };
   //   userCheck();
   // }
-  const handleClick = () => {
-    setToggle(!Toggle);
-  };
+
 
   useEffect(() => {
     if (isAuthenticated) {

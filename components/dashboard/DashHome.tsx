@@ -106,9 +106,7 @@ const DashHome = () => {
                 {key ? name : "Name"}
               </p>
 
-              <p className="text-white text-2xl font-medium">
-                {key ? name : "Name"}
-              </p>
+              
               <p className="text-[#909090]">Wallet Address: {walletAddress}</p>
               <p className="text-[#909090]">
                 {key ? userDescription : "Description"}
