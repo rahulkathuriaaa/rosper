@@ -1,13 +1,12 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useChat } from "../../hooks/useChat";
 
-const ChatPop = ({ room, name }) => {
+const ChatPop = ({ room }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { nameID, messages, currMessage, setCurrMessage, sendMessage } =
     useChat(room);
-  console.log(nameID);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
@@ -58,10 +57,12 @@ const ChatPop = ({ room, name }) => {
                     <div
                       key={index}
                       className={`w-full flex ${
-                        message.name !== name ? "justify-end" : "justify-start"
+                        message.name === nameID
+                          ? "justify-end"
+                          : "justify-start"
                       } gap-4`}
                     >
-                      {message.name !== name && (
+                      {message.name !== nameID && (
                         <Image
                           src={"/profile.svg"}
                           width={30}
@@ -72,14 +73,14 @@ const ChatPop = ({ room, name }) => {
                       )}
                       <p
                         className={`text-start p-2 max-w-[50%] border ${
-                          message.name === name
+                          message.name === nameID
                             ? "border-[#00B24F] bg-[#00B24F] text-white"
                             : "border-[#C6FFE6] bg-[#27292D] text-[#00B24F]"
                         } rounded-xl text-sm`}
                       >
-                        {message.messages }
+                        {message.messages}
                       </p>
-                      {message.name === name && (
+                      {message.name === nameID && (
                         <Image
                           src={"/profile.svg"}
                           width={30}
