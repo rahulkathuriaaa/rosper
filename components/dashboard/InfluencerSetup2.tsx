@@ -17,7 +17,7 @@ function InfluencerSetup2() {
 
           <div className="ml-2 flex flex-col gap-4">
             <div className="flex flex-col gap-4 overflow-auto h-[70vh]">
-              <div className="flex flex-col gap-3 w-[70%] bg-[#27292D] rounded-xl p-4">
+              <div className="flex flex-col gap-3 w-[80%] bg-[#27292D] rounded-xl p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
                     <Image
@@ -39,7 +39,7 @@ function InfluencerSetup2() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 w-[70%] bg-[#27292D] rounded-xl p-4">
+              <div className="flex flex-col gap-3 w-[80%] bg-[#27292D] rounded-xl p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
                     <Image
@@ -61,7 +61,7 @@ function InfluencerSetup2() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 w-[70%] bg-[#27292D] rounded-xl p-4">
+              <div className="flex flex-col gap-3 w-[80%] bg-[#27292D] rounded-xl p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
                     <Image
@@ -83,7 +83,7 @@ function InfluencerSetup2() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 w-[70%] bg-[#27292D] rounded-xl p-4">
+              <div className="flex flex-col gap-3 w-[80%] bg-[#27292D] rounded-xl p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
                     <Image
@@ -105,7 +105,7 @@ function InfluencerSetup2() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 w-[70%] bg-[#27292D] rounded-xl p-4">
+              <div className="flex flex-col gap-3 w-[80%] bg-[#27292D] rounded-xl p-4">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1">
                     <Image
@@ -127,14 +127,14 @@ function InfluencerSetup2() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 w-[70%] bg-[#27292D] rounded-xl p-4">
+              <div className="flex flex-col gap-3 w-[80%] bg-[#27292D] rounded-xl p-4">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-1">
                     <Image
-                      src="/Spaceship.svg"
+                      src="/icons/youtube.svg"
                       width="252"
                       height="300"
-                      className="w-[10%]"
+                      className="w-[50%]"
                       alt="Ref3r logo"
                     />
                     <p>Youtube</p>
@@ -149,14 +149,14 @@ function InfluencerSetup2() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 w-[70%] bg-[#27292D] rounded-xl p-4">
+              <div className="flex flex-col gap-3 w-[80%] bg-[#27292D] rounded-xl p-4">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-1">
                     <Image
-                      src="/Spaceship.svg"
+                      src="/icons/champ.svg"
                       width="252"
                       height="300"
-                      className="w-[10%]"
+                      className="w-[50%]"
                       alt="Ref3r logo"
                     />
                     <p>Mailchamp</p>
@@ -171,14 +171,14 @@ function InfluencerSetup2() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 w-[70%] bg-[#27292D] rounded-xl p-4">
+              <div className="flex flex-col gap-3 w-[80%] bg-[#27292D] rounded-xl p-4">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-1">
                     <Image
-                      src="/Spaceship.svg"
+                      src="/icons/beehive.svg"
                       width="252"
                       height="300"
-                      className="w-[10%]"
+                      className="w-[50%]"
                       alt="Ref3r logo"
                     />
                     <p>Beehiive</p>
@@ -193,14 +193,14 @@ function InfluencerSetup2() {
                 </p>
               </div>
 
-              <div className="flex flex-col gap-3 w-[70%] bg-[#27292D] rounded-xl p-4">
+              <div className="flex flex-col gap-3 w-[80%] bg-[#27292D] rounded-xl p-4">
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-1">
                     <Image
-                      src="/Spaceship.svg"
+                      src="/icons/medium.svg"
                       width="252"
                       height="300"
-                      className="w-[10%]"
+                      className="w-[50%]"
                       alt="Ref3r logo"
                     />
                     <p>Medium</p>
