@@ -30,6 +30,9 @@ const DashHomeInfuencers: React.FC<DashHomeInfuencersProps> = ({
   const router = useRouter();
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [roomId, setRoomId] = useState("");
+
   const currentUserKey = usePublicKey.getState().publicKey;
 
   useEffect(() => {
@@ -83,9 +86,12 @@ const DashHomeInfuencers: React.FC<DashHomeInfuencersProps> = ({
   //   console.log("huiiii");
   //   return <ChatPop room={room} />;
   // };
-  const [isChatOpen, setIsChatOpen] = useState(false);
 
   const handleMessageClick = () => {
+    let chatUrl = useIsInfluencer.getState().isInfluencer
+      ? `${currentUserKey}-${cardUserKey}-${currentUserKey}`
+      : `${currentUserKey}-${currentUserKey}-${cardUserKey}`;
+    setRoomId(chatUrl);
     setIsChatOpen(!isChatOpen);
   };
 
@@ -101,15 +107,9 @@ const DashHomeInfuencers: React.FC<DashHomeInfuencersProps> = ({
       <p className="text-white text-lg font-medium">{name}</p>
       {isConnected ? (
         <>
-          <button
-            onClick={handleMessageClick}
-            className="rounded bg-[#00B24F] text-white px-2 py-1 text-sm"
-          >
-            Message
+          <button onClick={handleMessageClick} className="">
+            <ChatPop name={name} room={roomId} />
           </button>
-          {isChatOpen && (
-            <ChatPop room={`${currentUserDocumentId}-${cardDocumentId}`} />
-          )}
         </>
       ) : (
         <button

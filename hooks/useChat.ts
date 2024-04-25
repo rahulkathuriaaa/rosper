@@ -3,24 +3,33 @@ import { useEffect, useState } from "react";
 import { appwriteApi } from "@/appwrite/config";
 import appwriteService from "@/appwrite/config";
 import conf from "@/conf/config";
-
+import { useIsInfluencer } from "@/store";
 export function useChat(room: string) {
-  const [nameID, setNameID] = useState<string>("");
-  const [messages, setMessages] = useState<any>([]);
-  const [currMessage, setCurrMessage] = useState<string>("");
+  const [nameID, setNameID] = useState<string>();
+  const [messages, setMessages] = useState<any>();
+  const [currMessage, setCurrMessage] = useState<string>();
 
   useEffect(() => {
     const result = room.replace(/%40/g, "@").split("-");
     const key = result[0];
+    const currentUserKey = result[1];
 
     async function updateData() {
-      if (result[0] === result[2]) {
+      console.log(key);
+      console.log(result[1] + "-" + result[2]);
+
+      if (currentUserKey === result[2]) {
         const data = await appwriteService.getInfluencerData(key);
         setNameID(data.documents[0].name);
-      } else if (result[0] === result[1]) {
+        console.log(data.documents[0].name);
+      } else if (currentUserKey === result[1]) {
         const data = await appwriteService.getBrandData(key);
         setNameID(data.documents[0].name);
+        console.log(data.documents[0].name);
       }
+
+      const data = await appwriteService.getCurrentUser();
+      console.log(data);
     }
 
     updateData();
@@ -63,6 +72,7 @@ export function useChat(room: string) {
   }
 
   return {
+
     nameID,
     messages,
     currMessage,

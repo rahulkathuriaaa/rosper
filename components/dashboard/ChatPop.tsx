@@ -1,16 +1,19 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import { useChat } from "../../hooks/useChat";
 
-const ChatPop = ({ room }) => {
+const ChatPop = ({ room, name }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { nameID, messages, currMessage, setCurrMessage, sendMessage } =
     useChat(room);
+  console.log(nameID);
 
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
+
+  console.log(messages);
 
   return (
     <div className="">
@@ -36,7 +39,7 @@ const ChatPop = ({ room }) => {
                   className="rounded-full"
                 />
                 <div className="flex flex-col justify-start items-start">
-                  <p>Name</p>
+                  <p>{name}</p>
                   <p className="text-sm font-normal">#CU6798S</p>
                 </div>
               </div>
@@ -55,12 +58,10 @@ const ChatPop = ({ room }) => {
                     <div
                       key={index}
                       className={`w-full flex ${
-                        message.name === nameID
-                          ? "justify-end"
-                          : "justify-start"
+                        message.name !== name ? "justify-end" : "justify-start"
                       } gap-4`}
                     >
-                      {message.name !== nameID && (
+                      {message.name !== name && (
                         <Image
                           src={"/profile.svg"}
                           width={30}
@@ -71,14 +72,14 @@ const ChatPop = ({ room }) => {
                       )}
                       <p
                         className={`text-start p-2 max-w-[50%] border ${
-                          message.name === nameID
+                          message.name === name
                             ? "border-[#00B24F] bg-[#00B24F] text-white"
                             : "border-[#C6FFE6] bg-[#27292D] text-[#00B24F]"
                         } rounded-xl text-sm`}
                       >
-                        {message.messages}
+                        {message.messages }
                       </p>
-                      {message.name === nameID && (
+                      {message.name === name && (
                         <Image
                           src={"/profile.svg"}
                           width={30}
