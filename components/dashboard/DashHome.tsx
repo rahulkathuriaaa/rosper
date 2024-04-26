@@ -1,4 +1,4 @@
-// @ts-nocheck 
+// @ts-nocheck
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -8,6 +8,7 @@ import CardsInfluencersForBrands from "../cards/CardsInfluencersForBrands";
 import CardsProductForBrands from "../cards/CardsProductForBrands";
 import { checkUserType } from "@/appwrite/utils";
 import appwriteService from "@/appwrite/config";
+import DiscountCodeGenerator from "./DiscountCodeGenerator";
 
 import {
   useBrandData,
@@ -260,6 +261,7 @@ const DashHome = () => {
                 <p>Invalid data format for influencers.</p>
               ))}
           </div>
+          <DiscountCodeGenerator></DiscountCodeGenerator>
         </div>
       </div>
     </div>
