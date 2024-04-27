@@ -2,6 +2,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { useChat } from "../../hooks/useChat";
+import { usePublicKey } from "@/store";
 
 const ChatPop = ({ room, name }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,7 @@ const ChatPop = ({ room, name }) => {
   const togglePopup = () => {
     setIsOpen(!isOpen);
   };
-
+  const key = usePublicKey.getState().publicKey;
   console.log(messages);
 
   return (
@@ -58,10 +59,10 @@ const ChatPop = ({ room, name }) => {
                     <div
                       key={index}
                       className={`w-full flex ${
-                        message.name !== name ? "justify-end" : "justify-start"
+                        message.key === key ? "justify-end" : "justify-start"
                       } gap-4`}
                     >
-                      {message.name !== name && (
+                      {message.key !== key && (
                         <Image
                           src={"/profile.svg"}
                           width={30}
@@ -72,22 +73,13 @@ const ChatPop = ({ room, name }) => {
                       )}
                       <p
                         className={`text-start p-2 max-w-[50%] border ${
-                          message.name === name
+                          message.key !== key
                             ? "border-[#00B24F] bg-[#00B24F] text-white"
                             : "border-[#C6FFE6] bg-[#27292D] text-[#00B24F]"
                         } rounded-xl text-sm`}
                       >
-                        {message.messages }
+                        {message.messages}
                       </p>
-                      {message.name === name && (
-                        <Image
-                          src={"/profile.svg"}
-                          width={30}
-                          height={30}
-                          alt="go"
-                          className="rounded-full"
-                        />
-                      )}
                     </div>
                   ))}
                 </div>

@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import { appwriteApi } from "@/appwrite/config";
 import appwriteService from "@/appwrite/config";
 import conf from "@/conf/config";
-import { useIsInfluencer } from "@/store";
+import { usePublicKey } from "@/store";
 export function useChat(room: string) {
+  const key = usePublicKey.getState().publicKey;
   const [nameID, setNameID] = useState<string>();
   const [messages, setMessages] = useState<any>();
   const [currMessage, setCurrMessage] = useState<string>();
@@ -35,7 +36,9 @@ export function useChat(room: string) {
     updateData();
 
     async function getMessages() {
-      const prevMessages = await appwriteService.getMessages(result[1] + result[2]);
+      const prevMessages = await appwriteService.getMessages(
+        result[1] + result[2]
+      );
       setMessages(prevMessages.documents);
     }
 
@@ -46,7 +49,11 @@ export function useChat(room: string) {
     const unsubscribe = appwriteApi.subscribe(
       `databases.${conf.appwriteDatabaseId}.collections.${conf.appwriteChatId}.documents`,
       (response) => {
-        if (response.events.includes("databases.*.collections.*.documents.*.create")) {
+        if (
+          response.events.includes(
+            "databases.*.collections.*.documents.*.create"
+          )
+        ) {
           setMessages((prev) => [...prev, response.payload]);
         }
       }
@@ -62,7 +69,7 @@ export function useChat(room: string) {
     const message = e.target.message.value;
     const name = nameID;
     const chatObj = {
-      name: name,
+      key: key,
       room: room.replace(/%40/g, "@"),
       messages: message,
     };
@@ -72,7 +79,6 @@ export function useChat(room: string) {
   }
 
   return {
-
     nameID,
     messages,
     currMessage,
