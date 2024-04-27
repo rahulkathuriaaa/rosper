@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
@@ -124,4 +125,4 @@ const DashHomeInfuencers: React.FC<DashHomeInfuencersProps> = ({
   );
 };
 
-export default DashHomeInfuencers;
+export default React.memo(DashHomeInfuencers);

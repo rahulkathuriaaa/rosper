@@ -3,9 +3,16 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import appwriteService from "@/appwrite/config";
-// import { useDynamicContext } from "@/lib/dynamic";
-// import { isAuthenticated, HandleLogout, getUser } from "@/ethers/utils"
+
+import {
+  createUser,
+  checkUserExist,
+  getInfluencerData,
+  getBrandData,
+  checkUserSetup,
+} from "../../utils";
+
+import { useDynamicContext } from "@/lib/dynamic";
 import {
   useBrandData,
   usePublicKey,
@@ -30,157 +37,13 @@ function LandingNavbar() {
   const [user, setUser] = useRecoilState<any>(UserState)
   const [provider, setProvider] = useRecoilState(Providers)
   const router = useRouter();
-  // const { user, isAuthenticated, setShowAuthFlow, handleLogOut } =
-  //   useDynamicContext();
-  const Web3Auth = useWeb3Auth
-  // console.log("The contract instance is ", contract)
-  useEffect(() => {
-    const init = async () => {
-      try {
-        // IMP START - SDK Initialization
-        await Web3Auth.initModal();
-        // IMP END - SDK Initialization
-        if (Web3Auth.connected) {
-          setLoggedIn(true);
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    };
+  const { user, isAuthenticated, setShowAuthFlow, handleLogOut } =
+    useDynamicContext();
+  // const isUserLoggedIn = useIsLoggedIn()
+  // const userAuthenticated = useIsAuthenticated()
+  // console.log("is user authenticated", userAuthenticated)
+  // console.log(isUserLoggedIn)
 
-    init();
-  }, [])
-
-  const HandleLogin = async () => {
-    // create a state for the provider and add it
-    const provider = await Web3Auth.connect()
-
-    window.localStorage.setItem('WEB3AUTH_PROVIDER', JSON.stringify(provider))
-    // setIsAuthenticated(userAuthenticated)
-
-    if (Web3Auth.connected) {
-      console.log(await Web3Auth.getUserInfo())
-      window.localStorage.setItem('WEB3AUTH_USER_AUTHETICATED', JSON.stringify(Web3Auth.connected))
-
-      window.localStorage.setItem('WEB3AUTH_USER_INFO', JSON.stringify(await Web3Auth.getUserInfo()))
-      return provider
-    } else window.localStorage.setItem('WEB3AUTH_USER_AUTHETICATED', JSON.stringify(Web3Auth.connected))
-  }
-  console.log("User payload", getUser)
-  const userAuthenticated = localStorage.getItem('WEB3AUTH_USER_AUTHETICATED')
-
-  useEffect(() => {
-    // TODOS solve this type errors
-    //@ts-ignore
-    console.log(JSON.parse(userAuthenticated))
-    //@ts-ignore
-    setIsAuthenticated(JSON.parse(userAuthenticated))
-  }, [userAuthenticated])
-
-
-  useEffect(() => {
-    const userDetails = window.localStorage.getItem('WEB3AUTH_USER_INFO')
-    if (userDetails) {
-      setUser(JSON.parse(userDetails))
-    }
-  }, [])
-
-  console.log("User", user)
-
-  console.log()
-  console.log("State of auth from recoil", isAuthenticated)
-  const HandleLogout = async () => {
-    if (isAuthenticated) {
-      window.localStorage.removeItem('WEB3AUTH_PROVIDER')
-      window.localStorage.removeItem('WEB3AUTH_USER_INFO')
-      window.localStorage.removeItem('WEB3AUTH_USER_AUTHETICATED')
-      await Web3Auth.logout()
-    }
-    window.localStorage.setItem('WEB3AUTH_USER_AUTHETICATED', JSON.stringify(await Web3Auth.connected))
-  }
-
-
-  console.log("The value of isAuthenticated is", isAuthenticated)
-  async function createUser(key: string) {
-    const user = await appwriteService.createUserAccount(key);
-  }
-  async function checkUserExist(key: string) {
-    console.log("checking if user exists otherwise registering new user");
-    try {
-      //await appwriteService.login(key);
-      const data = await appwriteService.getCurrentUser().then();
-      console.log(data);
-      return data;
-    } catch (error) {
-      console.log("error logong in ", error);
-    }
-    try {
-      const data = await createUser(key);
-      console.log(data);
-      await appwriteService.login(key);
-      return data;
-    } catch (error) {
-      console.log("error creating user", error);
-    }
-  }
-
-  async function getInfluencerData(key: string) {
-    const data = await appwriteService.getInfluencerData(key);
-    return data;
-  }
-
-  async function getBrandData(key: string) {
-    const data = await appwriteService.getBrandData(key);
-    return data;
-  }
-
-  async function checkUserSetup(key: string) {
-    const brandData = await appwriteService.getBrandData(key);
-    if (brandData.total) {
-      console.log("brand data", brandData);
-      useIsInfluencer.setState({
-        isInfluencer: false,
-      });
-      useBrandData.setState({
-        documentId: brandData.documents[0].$id,
-        key: brandData.documents[0].key,
-        name: brandData.documents[0].name,
-        description: brandData.documents[0].description,
-        website: brandData.documents[0].website,
-        address: brandData.documents[0].address,
-        business_reg_code: brandData.documents[0].business_reg_code,
-        links: brandData.documents[0].links,
-        ecommerce_platform: brandData.documents[0].ecommerce_platform,
-        api_key: brandData.documents[0].api_key,
-        industry: brandData.documents[0].industry,
-        profile_img: brandData.documents[0].profile_img,
-        connections: brandData.documents[0].connections,
-      });
-    }
-
-    const influencerData = await getInfluencerData(key);
-    if (influencerData.total) {
-      console.log(influencerData);
-      useIsInfluencer.setState({
-        isInfluencer: true,
-      });
-      useInfluencerData.setState({
-        documentId: influencerData.documents[0].$id,
-        key: influencerData.documents[0].key,
-        name: influencerData.documents[0].name,
-        bio: influencerData.documents[0].bio,
-        links: influencerData.documents[0].links,
-        niche: influencerData.documents[0].niche,
-        main_platform: influencerData.documents[0].main_platform,
-        follower_count: influencerData.documents[0].follower_count,
-        connections: influencerData.documents[0].connections,
-      });
-    }
-
-    if (brandData.total || influencerData.total) {
-      return true;
-    }
-  }
   // if (isAuthenticated) {
   //   console.log("user payload data", user?.email);
 
@@ -198,28 +61,7 @@ function LandingNavbar() {
   //   userCheck();
   // }
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      console.log("user payload data", user?.email);
-
-      usePublicKey.setState({ publicKey: user?.email });
-      const key = usePublicKey.getState().publicKey;
-      console.log(key);
-
-      const userCheck = async () => {
-        console.log("key being added", key);
-        const user = await checkUserExist(key);
-        const setup = await checkUserSetup(key);
-        console.log(user);
-        console.log(setup);
-        if (user) {
-          router.push("/dashboard");
-        }
-      };
-
-      userCheck();
-    }
-  }, [isAuthenticated]); // Only re-run when isAuthenticated changes
+  // Only re-run when isAuthenticated changes
 
   //const key = "0x953ed43e99938fDD2B0c91E4521Cccc2762aF70A";
   //const key = usePublicKey.getState().publicKey;
@@ -438,7 +280,7 @@ function LandingNavbar() {
                 </div>
               </div>
             ) : (
-              <Link href="/dashboard">
+              <Link href="">
                 <button
                   className="border px-6 py-2 rounded hover:bg-white hover:text-black"
                   onClick={HandleLogin}

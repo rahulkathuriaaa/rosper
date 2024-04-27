@@ -1,13 +1,19 @@
-
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import Image from "next/image";
 import BrandSetup1 from "@/components/dashboard/BrandSetup1";
 import InfluencerSetup1 from "@/components/dashboard/InfluencerSetup1";
 import DashboardComponent from "@/components/dashboard/DashboardComponent";
 import { useBrandData, useInfluencerData, usePublicKey } from "@/store";
+import {
+  createUser,
+  checkUserExist,
+  getInfluencerData,
+  getBrandData,
+  checkUserSetup,
+} from "../../utils";
 
 function Dashboard() {
   const key = usePublicKey.getState().publicKey;
@@ -15,9 +21,36 @@ function Dashboard() {
   const [choose, setChoose] = useState(true);
   const [brand, setBrand] = useState(false);
   const [influencer, setInfluencer] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useState(false);
   console.log("setup data");
   console.log(useBrandData.getState().key);
   console.log(useInfluencerData.getState().key);
+
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //     console.log("user payload data", user?.email);
+
+  //     usePublicKey.setState({ publicKey: user?.email });
+  //     const key = usePublicKey.getState().publicKey;
+  //     console.log(key);
+
+  //     const userCheck = async () => {
+  //       console.log("key being added", key);
+  //       const user = await checkUserExist(key);
+  //       const setup = await checkUserSetup(key);
+  //       console.log(user);
+  //       console.log(setup);
+  //       if (user) {
+  //         if (useBrandData.getState().key || useInfluencerData.getState().key) {
+  //           setLoggedInUser(true);
+  //         }
+  //       }
+  //     };
+
+  //     userCheck();
+  //   }
+  // }, [isAuthenticated]);
+
   return (
     <>
       {useBrandData.getState().key || useInfluencerData.getState().key ? (

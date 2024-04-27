@@ -261,7 +261,7 @@ const DashHome = () => {
                 <p>Invalid data format for influencers.</p>
               ))}
           </div>
-          <DiscountCodeGenerator></DiscountCodeGenerator>
+          {/* <DiscountCodeGenerator></DiscountCodeGenerator> */}
         </div>
       </div>
     </div>
