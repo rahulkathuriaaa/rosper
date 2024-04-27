@@ -74,6 +74,7 @@ const DashHome = () => {
   useEffect(() => {
     updateData(key);
   }, []);
+  
 
 
   if (loading == true) return <>Fetching....</>;

@@ -14,9 +14,11 @@ import {
   getBrandData,
   checkUserSetup,
 } from "../../utils";
+import { useDynamicContext } from "@/lib/dynamic";
 
 function Dashboard() {
-  const key = usePublicKey.getState().publicKey;
+  const { user, isAuthenticated } = useDynamicContext();
+  const key = user?.email;
 
   const [choose, setChoose] = useState(true);
   const [brand, setBrand] = useState(false);
@@ -26,34 +28,34 @@ function Dashboard() {
   console.log(useBrandData.getState().key);
   console.log(useInfluencerData.getState().key);
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     console.log("user payload data", user?.email);
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log("user payload data", user?.email);
 
-  //     usePublicKey.setState({ publicKey: user?.email });
-  //     const key = usePublicKey.getState().publicKey;
-  //     console.log(key);
+      usePublicKey.setState({ publicKey: user?.email });
+      const key = usePublicKey.getState().publicKey;
+      console.log(key);
 
-  //     const userCheck = async () => {
-  //       console.log("key being added", key);
-  //       const user = await checkUserExist(key);
-  //       const setup = await checkUserSetup(key);
-  //       console.log(user);
-  //       console.log(setup);
-  //       if (user) {
-  //         if (useBrandData.getState().key || useInfluencerData.getState().key) {
-  //           setLoggedInUser(true);
-  //         }
-  //       }
-  //     };
+      const userCheck = async () => {
+        console.log("key being added", key);
+        const user = await checkUserExist(key);
+        const setup = await checkUserSetup(key);
+        console.log(user);
+        console.log(setup);
+        if (user) {
+          if (useBrandData.getState().key || useInfluencerData.getState().key) {
+            setLoggedInUser(true);
+          }
+        }
+      };
 
-  //     userCheck();
-  //   }
-  // }, [isAuthenticated]);
+      userCheck();
+    }
+  }, []);
 
   return (
     <>
-      {useBrandData.getState().key || useInfluencerData.getState().key ? (
+      {loggedInUser ? (
         <DashboardComponent />
       ) : (
         <>

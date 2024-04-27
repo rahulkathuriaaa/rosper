@@ -19,15 +19,15 @@ export function useChat(room: string) {
       console.log(key);
       console.log(result[1] + "-" + result[2]);
 
-      if (currentUserKey === result[2]) {
-        const data = await appwriteService.getInfluencerData(key);
-        setNameID(data.documents[0].name);
-        console.log(data.documents[0].name);
-      } else if (currentUserKey === result[1]) {
-        const data = await appwriteService.getBrandData(key);
-        setNameID(data.documents[0].name);
-        console.log(data.documents[0].name);
-      }
+      // if (currentUserKey === result[2]) {
+      //   const data = await appwriteService.getInfluencerData(key);
+      //   setNameID(data.documents[0].name);
+      //   console.log(data.documents[0].name);
+      // } else if (currentUserKey === result[1]) {
+      //   const data = await appwriteService.getBrandData(key);
+      //   setNameID(data.documents[0].name);
+      //   console.log(data.documents[0].name);
+      // }
 
       const data = await appwriteService.getCurrentUser();
       console.log(data);

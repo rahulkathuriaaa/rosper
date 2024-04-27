@@ -7,7 +7,8 @@ const conf = {
   ),
   appwriteBrandId: String(process.env.NEXT_PUBLIC_APPWRITE_BRAND_COLLECTION_ID),
   appwriteChatId: String(process.env.NEXT_PUBLIC_APPWRITE_CHAT_COLLECTION_ID),
-  appwriteBucketId:String(process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID),
+  appwriteBucketId: String(process.env.NEXT_PUBLIC_APPWRITE_BUCKET_ID),
+  appwriteApi: String(process.env.NEXT_PUBLIC_APPWRITE_URL),
 };
 
 export default conf;
