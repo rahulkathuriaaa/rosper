@@ -10,7 +10,6 @@ import HowItWorks from "@/components/landing/HowItWorks";
 import appwriteService from "@/appwrite/config";
 import { usePublicKey } from "@/store";
 import Footer from "@/components/landing/Footer";
-import { useIsAuthenticated } from "@/hooks/test";
 
 export default function Home() {
   return (

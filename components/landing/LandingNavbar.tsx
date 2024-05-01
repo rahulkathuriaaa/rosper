@@ -4,8 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import appwriteService from "@/appwrite/config";
-
-import { useDynamicContext } from "@/lib/dynamic";
+// import { useDynamicContext } from "@/lib/dynamic";
+// import { isAuthenticated, HandleLogout, getUser } from "@/ethers/utils"
 import {
   useBrandData,
   usePublicKey,
@@ -13,17 +13,94 @@ import {
   useIsInfluencer,
 } from "@/store";
 import { useUserActions } from "@/hooks/useUserActions";
+import { useWeb3Auth } from "@/hooks/useWeb3Auth";
+import { useRecoilState } from "recoil";
+import { authState } from "@/context/atoms/isAuthenticated";
+import { UserState } from "@/context/atoms/UserState";
+import { Providers } from "@/context/atoms/Provider";
+import { ContractInstance } from "@/ethers/utils";
+import { IProvider } from "@web3auth/base";
 
 function LandingNavbar() {
   const [Toggle, setToggle] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
+  const [getUser, setGetUser] = useState([])
+  const [LoggedIn, setLoggedIn] = useState(false)
+  const [isAuthenticated, setIsAuthenticated] = useRecoilState(authState)
+  const [user, setUser] = useRecoilState<any>(UserState)
+  const [provider, setProvider] = useRecoilState(Providers)
   const router = useRouter();
-  const { user, isAuthenticated, setShowAuthFlow, handleLogOut } =
-    useDynamicContext();
-  // const isUserLoggedIn = useIsLoggedIn()
-  // const userAuthenticated = useIsAuthenticated()
-  // console.log("is user authenticated", userAuthenticated)
-  // console.log(isUserLoggedIn)
+  // const { user, isAuthenticated, setShowAuthFlow, handleLogOut } =
+  //   useDynamicContext();
+  const Web3Auth = useWeb3Auth
+  // console.log("The contract instance is ", contract)
+  useEffect(() => {
+    const init = async () => {
+      try {
+        // IMP START - SDK Initialization
+        await Web3Auth.initModal();
+        // IMP END - SDK Initialization
+        if (Web3Auth.connected) {
+          setLoggedIn(true);
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    init();
+  }, [])
+
+  const HandleLogin = async () => {
+    // create a state for the provider and add it
+    const provider = await Web3Auth.connect()
+
+    window.localStorage.setItem('WEB3AUTH_PROVIDER', JSON.stringify(provider))
+    // setIsAuthenticated(userAuthenticated)
+
+    if (Web3Auth.connected) {
+      console.log(await Web3Auth.getUserInfo())
+      window.localStorage.setItem('WEB3AUTH_USER_AUTHETICATED', JSON.stringify(Web3Auth.connected))
+
+      window.localStorage.setItem('WEB3AUTH_USER_INFO', JSON.stringify(await Web3Auth.getUserInfo()))
+      return provider
+    } else window.localStorage.setItem('WEB3AUTH_USER_AUTHETICATED', JSON.stringify(Web3Auth.connected))
+  }
+  console.log("User payload", getUser)
+  const userAuthenticated = localStorage.getItem('WEB3AUTH_USER_AUTHETICATED')
+
+  useEffect(() => {
+    // TODOS solve this type errors
+    //@ts-ignore
+    console.log(JSON.parse(userAuthenticated))
+    //@ts-ignore
+    setIsAuthenticated(JSON.parse(userAuthenticated))
+  }, [userAuthenticated])
+
+
+  useEffect(() => {
+    const userDetails = window.localStorage.getItem('WEB3AUTH_USER_INFO')
+    if (userDetails) {
+      setUser(JSON.parse(userDetails))
+    }
+  }, [])
+
+  console.log("User", user)
+
+  console.log()
+  console.log("State of auth from recoil", isAuthenticated)
+  const HandleLogout = async () => {
+    if (isAuthenticated) {
+      window.localStorage.removeItem('WEB3AUTH_PROVIDER')
+      window.localStorage.removeItem('WEB3AUTH_USER_INFO')
+      window.localStorage.removeItem('WEB3AUTH_USER_AUTHETICATED')
+      await Web3Auth.logout()
+    }
+    window.localStorage.setItem('WEB3AUTH_USER_AUTHETICATED', JSON.stringify(await Web3Auth.connected))
+  }
+
+
+  console.log("The value of isAuthenticated is", isAuthenticated)
   async function createUser(key: string) {
     const user = await appwriteService.createUserAccount(key);
   }
@@ -186,7 +263,7 @@ function LandingNavbar() {
   }, [isAuthenticated]);
 
   const myLoader = () => {
-    return `https://api.dicebear.com/7.x/initials/svg?seed=${user?.firstName}`;
+    return `https://api.dicebear.com/7.x/initials/svg?seed=${user?.name}`;
   };
 
   const handleClick = () => {
@@ -254,7 +331,7 @@ function LandingNavbar() {
                 <div className="flex items-center justify-center w-10 h-10 rounded-full bg-secondary hover:underline">
                   <Image
                     loader={myLoader}
-                    src={`https://api.dicebear.com/7.x/initials/svg?seed=${user?.firstName}`}
+                    src={`https://api.dicebear.com/7.x/initials/svg?seed=${user?.name}`}
                     className="w-10 h-10 rounded-full"
                     width={10}
                     height={10}
@@ -271,14 +348,14 @@ function LandingNavbar() {
                   <div className="flex items-center p-3 border-b-2 border-b-[#00B24F] justify-left">
                     <Image
                       loader={myLoader}
-                      src={`https://api.dicebear.com/7.x/initials/svg?seed=${user?.firstName}`}
+                      src={`https://api.dicebear.com/7.x/initials/svg?seed=${user?.name}`}
                       width={10}
                       height={10}
                       alt=""
                       className="w-8 rounded-full"
                     />
                     <p className="pl-2 text-[17px] font-semibold">
-                      {user?.firstName}
+                      {user?.name}
                     </p>
                   </div>
                   <Link href="/">
@@ -321,7 +398,7 @@ function LandingNavbar() {
                   <hr />
                   <button
                     className="w-full hover:bg-[#6E6E6E]"
-                    onClick={() => handleLogOut()}
+                    onClick={HandleLogout}
                   >
                     <div className="flex items-center p-4 justify-left w-full hover:bg-[#6E6E6E]">
                       <div className="pr-2">
@@ -364,7 +441,7 @@ function LandingNavbar() {
               <Link href="/dashboard">
                 <button
                   className="border px-6 py-2 rounded hover:bg-white hover:text-black"
-                  onClick={() => setShowAuthFlow(true)}
+                  onClick={HandleLogin}
                 >
                   Launch App
                 </button>
@@ -393,9 +470,8 @@ function LandingNavbar() {
           )}
 
           <div
-            className={`delay-300 md:hidden text-center flex justify-center items-center gap-8 py-12 h-screen bg-black/70 w-full fixed top-[55px] text-white flex-col ${
-              Toggle ? "right-[100%]" : "left-[100%]}"
-            }`}
+            className={`delay-300 md:hidden text-center flex justify-center items-center gap-8 py-12 h-screen bg-black/70 w-full fixed top-[55px] text-white flex-col ${Toggle ? "right-[100%]" : "left-[100%]}"
+              }`}
           >
             <div className="flex flex-col gap-[2rem]  w-[80%]">
               <Link href="/">

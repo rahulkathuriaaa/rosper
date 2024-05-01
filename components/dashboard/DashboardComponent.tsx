@@ -12,7 +12,7 @@ function DashboardComponent() {
   const [activePage, setActivePage] = useState("DashHomePage");
   return (
     <Layout>
-      <div className="bg-[#1E2023] w-[80%] min-h-screen overflow-y-auto flex">
+      <div className="bg-[#1E2023]  w-[80%] min-h-screen overflow-y-auto flex">
         <RenderPage />
       </div>
     </Layout>
