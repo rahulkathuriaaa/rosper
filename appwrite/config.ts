@@ -1,28 +1,14 @@
 import conf from "@/conf/config";
 // @ts-ignore
-import {
-  Query,
-  Client,
-  Account,
-  ID,
-  Databases,
-  Storage,
-  Messaging,
-} from "appwrite";
+import { Query, Client, Account, ID, Databases, Storage } from "appwrite";
 
 const appwriteClient = new Client();
-appwriteClient
-  .setEndpoint(conf.appwriteUrl)
-  .setProject(conf.appwriteProjectId)
-
 
 export const appwriteApi = appwriteClient
   .setEndpoint(conf.appwriteUrl)
-  .setProject(conf.appwriteProjectId)
- 
+  .setProject(conf.appwriteProjectId);
 
 export const account = new Account(appwriteClient);
-const messaging = new Messaging(appwriteClient);
 
 const database = new Databases(appwriteClient);
 const storage = new Storage(appwriteClient);
@@ -85,16 +71,12 @@ export class AppwriteService {
 
   async createBrand(brandData: any) {
     try {
-      const res = database.createDocument(
+      return database.createDocument(
         conf.appwriteDatabaseId,
         conf.appwriteBrandId,
         ID.unique(),
         brandData
       );
-      if (res) {
-        this.sendWelcomeEmail(brandData.key);
-      }
-      return res;
     } catch (error) {
       console.log(error);
     }
@@ -244,24 +226,6 @@ export class AppwriteService {
     } catch (error) {
       console.log(error);
     }
-  }
-  async sendWelcomeEmail(email: string) {
-    try {
-      const message = await messaging.createEmail(
-        ID.unique(), // messageId
-        "Welcome to refer", // subject
-        "you have sucessfully created an account at refer", // content
-        [], // topics (optional)
-        [], // users (optional)
-        [email], // targets (optional)
-        [], // cc (optional)
-        [], // bcc (optional)
-        false, // draft (optional)
-        false, // html (optional)
-        "" // scheduledAt (optional)
-      );
-      console.log(message);
-    } catch (error) {}
   }
 }
 

@@ -7,6 +7,8 @@ export async function POST(req, res) {
     // Replace this with your own logic to generate a unique code
     return "DISCOUNT20";
   };
+  const reqBody = await req.json();
+  console.log("request body", reqBody);
   try {
     // Create a new Shopify API instance with the provided API key
     const shop = new shopify({
@@ -16,7 +18,7 @@ export async function POST(req, res) {
 
     // Define the discount code properties
     const discountCodeData = {
-      code: "DISCOUNT20",
+      code: reqBody.percentage,
       value: "20",
       value_type: "percentage",
       usage_limit: null,
@@ -49,11 +51,11 @@ export async function POST(req, res) {
       discountCodeData
     );
     console.log(response);
-    // res.status(200).json({ discountCode: response.discount_code });
+    res.status(200).json({ discountCode: response.discount_code });
   } catch (error) {
     console.error("Error creating discount code:", error.response.body);
-    // res
-    //   .status(500)
-    //   .json({ error: "An error occurred while creating the discount code." });
+    res
+      .status(500)
+      .json({ error: "An error occurred while creating the discount code." });
   }
 }

@@ -99,3 +99,37 @@ export async function checkUserSetup(key: string) {
     return true;
   }
 }
+
+export async function generateWelcomeEmail(id: string) {
+  try {
+    const response = await fetch("/api/welcomeMail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id }),
+    });
+  } catch (error) {
+    console.log("error sending email", error);
+  }
+}
+
+export async function generateDiscountCode(percentage: number, code: string) {
+  try {
+    const response = await fetch("/api/codeGen", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ percentage: percentage, code: code }),
+    });
+    console.log(response);
+    if (response.ok) {
+      const data = await response.json();
+    } else {
+      console.log("An error occurred while creating the discount code.");
+    }
+  } catch (error) {
+    console.error("Error creating discount code:", error);
+  }
+}
