@@ -13,7 +13,7 @@ export async function POST(req, res) {
     // Create a new Shopify API instance with the provided API key
     const shop = new shopify({
       shopName: "refertest0.myshopify.com",
-      accessToken: "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",
+      accessToken: "",
     });
 
     // Define the discount code properties
