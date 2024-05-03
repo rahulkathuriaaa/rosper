@@ -1,35 +1,33 @@
-// @ts-nocheck 
+// @ts-nocheck
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { appwriteApi } from "@/appwrite/config";
 import appwriteService from "@/appwrite/config";
 import conf from "@/conf/config";
-
+import { usePublicKey } from "@/store";
 export function useChat(room: string) {
+  const key = usePublicKey.getState().publicKey;
   const [nameID, setNameID] = useState<string>();
-  const [roomID, setRoomID] = useState<string>();
   const [messages, setMessages] = useState<any>();
   const [currMessage, setCurrMessage] = useState<string>();
-  const router = useRouter();
 
   useEffect(() => {
     const result = room.replace(/%40/g, "@").split("-");
     const key = result[0];
+    const currentUserKey = result[1];
 
     async function updateData() {
       console.log(key);
-      setRoomID(result[1] + result[2]);
       console.log(result[1] + "-" + result[2]);
 
-      if (result[0] === result[2]) {
-        const data = await appwriteService.getInfluencerData(key);
-        setNameID(data.documents[0].name);
-        console.log(data.documents[0].name);
-      } else if (result[0] === result[1]) {
-        const data = await appwriteService.getBrandData(key);
-        setNameID(data.documents[0].name);
-        console.log(data);
-      }
+      // if (currentUserKey === result[2]) {
+      //   const data = await appwriteService.getInfluencerData(key);
+      //   setNameID(data.documents[0].name);
+      //   console.log(data.documents[0].name);
+      // } else if (currentUserKey === result[1]) {
+      //   const data = await appwriteService.getBrandData(key);
+      //   setNameID(data.documents[0].name);
+      //   console.log(data.documents[0].name);
+      // }
 
       const data = await appwriteService.getCurrentUser();
       console.log(data);
@@ -38,8 +36,9 @@ export function useChat(room: string) {
     updateData();
 
     async function getMessages() {
-      const prevMessages = await appwriteService.getMessages(result[1] + result[2]);
-      console.log(prevMessages)
+      const prevMessages = await appwriteService.getMessages(
+        result[1] + result[2]
+      );
       setMessages(prevMessages.documents);
     }
 
@@ -50,7 +49,11 @@ export function useChat(room: string) {
     const unsubscribe = appwriteApi.subscribe(
       `databases.${conf.appwriteDatabaseId}.collections.${conf.appwriteChatId}.documents`,
       (response) => {
-        if (response.events.includes("databases.*.collections.*.documents.*.create")) {
+        if (
+          response.events.includes(
+            "databases.*.collections.*.documents.*.create"
+          )
+        ) {
           setMessages((prev) => [...prev, response.payload]);
         }
       }
@@ -66,8 +69,8 @@ export function useChat(room: string) {
     const message = e.target.message.value;
     const name = nameID;
     const chatObj = {
-      name: name,
-      room: roomID,
+      key: key,
+      room: room.replace(/%40/g, "@"),
       messages: message,
     };
     setCurrMessage("");
@@ -77,11 +80,9 @@ export function useChat(room: string) {
 
   return {
     nameID,
-    roomID,
     messages,
     currMessage,
     setCurrMessage,
     sendMessage,
-    router,
   };
 }

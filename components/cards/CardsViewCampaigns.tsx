@@ -34,7 +34,7 @@ const CardsViewCampaigns = ({ image, name }: { image: any; name: string }) => {
               alt="home fill"
               className=""
             /> */}
-            <ChatPop />
+            {/* <ChatPop /> */}
           </button>
         </div>
       </div>

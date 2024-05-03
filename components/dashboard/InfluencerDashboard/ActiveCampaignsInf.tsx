@@ -1,24 +1,24 @@
 import React from "react";
-import CardsPastCampaigns from "../cards/CardsPastCampaigns";
+import CardsInfActiveCampaigns from "@/components/cards/influencers/CardsInfActiveCampaigns";
 
-function PastCampaigns() {
+function ActiveCampaignsInf() {
   return (
     <div className="flex flex-col gap-4">
-      <CardsPastCampaigns
+      <CardsInfActiveCampaigns
         campaign="Campaign 1"
         campaigndesc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident consequatur maxime magnam, ipsum, voluptates odit iusto autem quod, dolorum voluptate sunt suscipit dolor. Maxime, facilis."
         number={"30"}
         balance={"20"}
         total={"200"}
       />
-      <CardsPastCampaigns
+      <CardsInfActiveCampaigns
         campaign="Campaign 2"
         campaigndesc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident consequatur maxime magnam, ipsum, voluptates odit iusto autem quod, dolorum voluptate sunt suscipit dolor. Maxime, facilis."
         number={"50"}
         balance={"20"}
         total={"200"}
       />
-      <CardsPastCampaigns
+      <CardsInfActiveCampaigns
         campaign="Campaign 3"
         campaigndesc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident consequatur maxime magnam, ipsum, voluptates odit iusto autem quod, dolorum voluptate sunt suscipit dolor. Maxime, facilis."
         number={"40"}
@@ -29,4 +29,4 @@ function PastCampaigns() {
   );
 }
 
-export default PastCampaigns;
+export default ActiveCampaignsInf;

@@ -72,8 +72,8 @@ function Hero() {
         </p>
 
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 w-[85%] md:w-[75%] justify-center items-center md:items-end mt-20 mb-20 md:mb-10">
-          <div className="flex justify-between items-center gap-4 bg-[#2D2D2D] md:w-[50%] rounded-3xl md:rounded-2xl p-5 md:p-10">
-            <div className="text-white w-[65%]">
+          <div className="flex justify-center items-center bg-[#2D2D2D] md:w-[50%] rounded-3xl md:rounded-2xl p-5 md:p-8">
+            <div className="text-white w-[65%] text-center">
               <p className="md:text-[1.5rem] font-bold">For Reference</p>
               <p className="text-[0.5rem] text-[#909090] md:text-xs font-bold">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
@@ -81,27 +81,27 @@ function Hero() {
               </p>
             </div>
 
-            <Link className="" href="/dashboard">
+            {/* <Link className="" href="/dashboard">
               <button className="bg-[#00B24F] hover:bg-white px-4 py-2 text-[0.8rem] text-white hover:text-black rounded-2xl md:rounded-lg">
                 Connect
               </button>
-            </Link>
+            </Link> */}
           </div>
 
-          <div className="flex justify-between items-center gap-4 bg-[#2D2D2D] md:bg-[#058E41] md:w-[50%] rounded-3xl md:rounded-2xl p-5 md:py-16 md:px-10">
-            <div className="text-white w-[65%]">
+          <div className="flex justify-center items-center bg-[#2D2D2D] md:bg-[#058E41] md:w-[50%] rounded-3xl md:rounded-2xl p-5 md:py-14">
+            <div className="text-white text-center w-[65%]">
               <p className="md:text-[1.5rem] font-bold">For Brands</p>
-              <p className="text-[0.5rem] md:text-xs font-bold text-[#909090] md:text-white">
+              <p className="text-[0.5rem] md:text-xs font-semibold text-[#909090] md:text-white">
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry.
               </p>
             </div>
 
-            <Link className="" href="/dashboard">
+            {/* <Link className="" href="/dashboard">
               <button className="bg-[#00B24F] md:bg-white md:hover:bg-black px-4 py-2 text-[0.8rem] text-white md:text-black md:hover:text-white rounded-2xl md:rounded-lg">
                 Connect
               </button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>

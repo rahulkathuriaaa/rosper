@@ -35,7 +35,7 @@ export class AppwriteService {
     const email = key;
     const password = key;
     try {
-      return await account.createEmailSession(email, password);
+      return await account.createEmailPasswordSession(email, password);
     } catch (error) {
       throw error;
     }

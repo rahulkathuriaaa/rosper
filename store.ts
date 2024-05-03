@@ -1,4 +1,3 @@
-import zustand from "zustand";
 import { create } from "zustand";
 
 type InfluencerData = {
@@ -69,12 +68,12 @@ export const useInfluencerData = create<InfluencerData>((set) => ({
   setKey: (key: string) => {
     set(() => ({ key: key }));
   },
-  setName: (name: string) => {},
-  setBio: (bio: string) => {},
-  setLinks: (links: string) => {},
-  setNiche: (niche: string) => {},
-  setMain_platform: (mainPlatform: string) => {},
-  setFollower_count: (followerCounr: string) => {},
+  setName: (name: string) => { },
+  setBio: (bio: string) => { },
+  setLinks: (links: string) => { },
+  setNiche: (niche: string) => { },
+  setMain_platform: (mainPlatform: string) => { },
+  setFollower_count: (followerCounr: string) => { },
 }));
 
 export const useBrandData = create<BrandData>((set) => ({

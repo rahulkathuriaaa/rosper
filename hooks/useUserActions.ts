@@ -1,3 +1,4 @@
+// @ts-nocheck
 import appwriteService from "@/appwrite/config";
 import { useBrandData, useInfluencerData, useIsInfluencer } from "@/store";
 

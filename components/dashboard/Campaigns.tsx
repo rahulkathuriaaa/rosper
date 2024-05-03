@@ -3,17 +3,16 @@ import { useState } from "react";
 import ActiveCampaigns from "./ActiveCampaigns";
 import PastCampaigns from "./PastCampaigns";
 import CreateCampaign from "./CreateCampaign";
-import ViewCampaign from "./ViewCampaign";
 
 const Campaigns = () => {
   const [choose, setChoose] = useState(false);
-  const [whitelist, setWhitelist] = useState(true);
+  const [create, setCreate] = useState(true);
 
   return (
     <>
       <div
         className={`w-[98%] flex flex-col pt-10 pb-6 gap-10 pl-4 ${
-          whitelist ? "flex" : "hidden"
+          create ? "flex" : "hidden"
         } `}
       >
         <div className="flex justify-between items-center">
@@ -21,7 +20,7 @@ const Campaigns = () => {
           <button
             className="py-2 px-3 bg-[#00B24F] text-white text-sm rounded-lg cursor-pointer"
             onClick={() => {
-              setWhitelist(false);
+              setCreate(false);
             }}
           >
             Create Campaign
@@ -56,7 +55,7 @@ const Campaigns = () => {
         </div>
       </div>
 
-      {whitelist ? "" : <CreateCampaign />}
+      {create ? "" : <CreateCampaign />}
 
       
 

@@ -1,4 +1,5 @@
 "use client";
+import React from "react";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import {
@@ -10,6 +11,7 @@ import {
 import { checkUserType } from "@/appwrite/utils";
 import appwriteService from "@/appwrite/config";
 import { useRouter } from "next/navigation";
+import ChatPop from "../dashboard/ChatPop";
 
 type DashHomeInfuencersProps = {
   image: string;
@@ -19,7 +21,7 @@ type DashHomeInfuencersProps = {
   cardUserKey: string;
 };
 
-const DashHomeInfuencers : React.FC<DashHomeInfuencersProps>= ({
+const DashHomeInfuencers: React.FC<DashHomeInfuencersProps> = ({
   image,
   name,
   currentUserDocumentId,
@@ -29,6 +31,9 @@ const DashHomeInfuencers : React.FC<DashHomeInfuencersProps>= ({
   const router = useRouter();
   const [isConnected, setIsConnected] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [roomId, setRoomId] = useState("");
+
   const currentUserKey = usePublicKey.getState().publicKey;
 
   useEffect(() => {
@@ -46,7 +51,11 @@ const DashHomeInfuencers : React.FC<DashHomeInfuencersProps>= ({
   const updateConnections = async () => {
     setIsLoading(true);
 
-    const updateUserConnections = async (documentId:string, key:string, otherUserKey:string) => {
+    const updateUserConnections = async (
+      documentId: string,
+      key: string,
+      otherUserKey: string
+    ) => {
       const userType = await checkUserType(key);
       const updateFn =
         userType === "brand"
@@ -73,11 +82,18 @@ const DashHomeInfuencers : React.FC<DashHomeInfuencersProps>= ({
     setIsLoading(false);
   };
 
+  // const handleMessageClick = () => {
+  //   const room = `${currentUserDocumentId}-${cardDocumentId}`;
+  //   console.log("huiiii");
+  //   return <ChatPop room={room} />;
+  // };
+
   const handleMessageClick = () => {
-    const chatUrl = useIsInfluencer.getState().isInfluencer
-      ? `/chat/${currentUserKey}-${cardUserKey}-${currentUserKey}`
-      : `/chat/${currentUserKey}-${currentUserKey}-${cardUserKey}`;
-    router.push(chatUrl);
+    let chatUrl = useIsInfluencer.getState().isInfluencer
+      ? `${currentUserKey}-${cardUserKey}-${currentUserKey}`
+      : `${currentUserKey}-${currentUserKey}-${cardUserKey}`;
+    setRoomId(chatUrl);
+    setIsChatOpen(!isChatOpen);
   };
 
   return (
@@ -91,12 +107,11 @@ const DashHomeInfuencers : React.FC<DashHomeInfuencersProps>= ({
       />
       <p className="text-white text-lg font-medium">{name}</p>
       {isConnected ? (
-        <button
-          onClick={handleMessageClick}
-          className="rounded bg-[#00B24F] text-white px-2 py-1 text-sm"
-        >
-          Message
-        </button>
+        <>
+          <button onClick={handleMessageClick} className="">
+            <ChatPop name={name} room={roomId} />
+          </button>
+        </>
       ) : (
         <button
           onClick={updateConnections}
@@ -110,4 +125,4 @@ const DashHomeInfuencers : React.FC<DashHomeInfuencersProps>= ({
   );
 };
 
-export default DashHomeInfuencers;
+export default React.memo(DashHomeInfuencers);

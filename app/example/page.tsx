@@ -1,23 +1,117 @@
-"use client"
-import { SendTransactionSection } from "@/components/dashboard/TransactionTest"
-import { useDynamicContext } from "@/lib/dynamic"
-import { useBalance } from "wagmi"
+// @ts-nocheck 
+"use client";
+import { FC, FormEventHandler, useState } from "react";
+// 0x77929F1f2a404a6dEB38124E0E0c4d7F5500c595
+import { ethers } from "ethers";
+import {
+  Account,
+  Chain,
+  Hex,
+  Transport,
+  WalletClient,
+  PublicClient,
+  parseEther,
+} from "viem";
 
-export default function Home() {
+import {
+  useDynamicContext,
+  DynamicContextProvider,
+  DynamicWidget,
+} from "@dynamic-labs/sdk-react-core";
+import { getChain } from "@dynamic-labs/utils";
 
-    const { primaryWallet } = useDynamicContext()
-    //@ts-ignore
-    const signMessage = async () => {
-        // console.log('Signing message for primary account', primaryWallet)
-        const signer = await primaryWallet?.connector.ethers?.getSigner()
-        const signature = await signer.signMessage('Hello world')
-        console.log('Signature', signature)
+const SendTransactionSection: FC = () => {
+  const { primaryWallet } = useDynamicContext();
+
+  const [txnHash, setTxnHash] = useState("");
+  console.log(primaryWallet);
+
+  // if (!primaryWallet) return null;
+
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
+    const address = formData.get("address") as string;
+    const amount = formData.get("amount") as string;
+    const provider2 = await primaryWallet?.connector.getSigner<
+      WalletClient<Transport, Chain, Account>
+    >();
+    const provider = await primaryWallet.connector.ethers?.getSigner();
+
+    if (!provider) return;
+    const contractAddress = "0x77929F1f2a404a6dEB38124E0E0c4d7F5500c595"; // Your smart contract address
+    const contractAbi = [
+      {
+        inputs: [
+          {
+            internalType: "uint256",
+            name: "num",
+            type: "uint256",
+          },
+        ],
+        name: "store",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        inputs: [],
+        name: "retrieve",
+        outputs: [
+          {
+            internalType: "uint256",
+            name: "",
+            type: "uint256",
+          },
+        ],
+        stateMutability: "view",
+        type: "function",
+      },
+    ];
+    const functionName = "store";
+    const functionArguments = [12];
+
+    const contract = new ethers.Contract(
+      contractAddress,
+      contractAbi,
+      provider
+    );
+    try {
+      const tx = await contract[functionName](...functionArguments);
+      await tx.wait();
+      setTxnHash(tx.hash);
+    } catch (error) {
+      console.error("Transaction failed:", error);
     }
-    return (
-        <div>
-            <h1>This is example page</h1>
-            <button onClick={signMessage} className="border border-black px-4 py-2 rounded">Sign Message</button>
-            <SendTransactionSection />
-        </div>
-    )
-}
+
+    const client =
+      await primaryWallet.connector.getPublicClient<PublicClient>();
+
+    // const { transactionHash } = await client.getTransactionReceipt({
+    //   txnHash,
+    // });
+    // setTxnHash(transactionHash);
+  };
+
+  return (
+    <div>
+      <form onSubmit={onSubmit}>
+        <p>Send to ETH address</p>
+        <input name="address" type="text" placeholder="Address" />
+        <input name="amount" type="text" placeholder="0.05" />
+        <button type="submit">Send</button>
+        <span data-testid="transaction-section-result-hash">{txnHash}</span>
+      </form>
+      <button
+        onClick={() => {
+          console.log(primaryWallet);
+        }}
+      >
+        check
+      </button>{" "}
+    </div>
+  );
+};
+export default SendTransactionSection;
