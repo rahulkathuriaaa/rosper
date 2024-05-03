@@ -20,22 +20,10 @@ import {
   useIsInfluencer,
 } from "@/store";
 import { useUserActions } from "@/hooks/useUserActions";
-import { useWeb3Auth } from "@/hooks/useWeb3Auth";
-import { useRecoilState } from "recoil";
-import { authState } from "@/context/atoms/isAuthenticated";
-import { UserState } from "@/context/atoms/UserState";
-import { Providers } from "@/context/atoms/Provider";
-import { ContractInstance } from "@/ethers/utils";
-import { IProvider } from "@web3auth/base";
 
 function LandingNavbar() {
   const [Toggle, setToggle] = useState(true);
   const [isOpen, setIsOpen] = useState(false);
-  const [getUser, setGetUser] = useState([])
-  const [LoggedIn, setLoggedIn] = useState(false)
-  const [isAuthenticated, setIsAuthenticated] = useRecoilState(authState)
-  const [user, setUser] = useRecoilState<any>(UserState)
-  const [provider, setProvider] = useRecoilState(Providers)
   const router = useRouter();
   const { user, isAuthenticated, setShowAuthFlow, handleLogOut } =
     useDynamicContext();
@@ -105,7 +93,7 @@ function LandingNavbar() {
   }, [isAuthenticated]);
 
   const myLoader = () => {
-    return `https://api.dicebear.com/7.x/initials/svg?seed=${user?.name}`;
+    return `https://api.dicebear.com/7.x/initials/svg?seed=${user?.firstName}`;
   };
 
   const handleClick = () => {
@@ -173,7 +161,7 @@ function LandingNavbar() {
                 <div className="flex items-center justify-center w-10 h-10 rounded-full bg-secondary hover:underline">
                   <Image
                     loader={myLoader}
-                    src={`https://api.dicebear.com/7.x/initials/svg?seed=${user?.name}`}
+                    src={`https://api.dicebear.com/7.x/initials/svg?seed=${user?.firstName}`}
                     className="w-10 h-10 rounded-full"
                     width={10}
                     height={10}
@@ -190,14 +178,14 @@ function LandingNavbar() {
                   <div className="flex items-center p-3 border-b-2 border-b-[#00B24F] justify-left">
                     <Image
                       loader={myLoader}
-                      src={`https://api.dicebear.com/7.x/initials/svg?seed=${user?.name}`}
+                      src={`https://api.dicebear.com/7.x/initials/svg?seed=${user?.firstName}`}
                       width={10}
                       height={10}
                       alt=""
                       className="w-8 rounded-full"
                     />
                     <p className="pl-2 text-[17px] font-semibold">
-                      {user?.name}
+                      {user?.firstName}
                     </p>
                   </div>
                   <Link href="/">
@@ -240,7 +228,7 @@ function LandingNavbar() {
                   <hr />
                   <button
                     className="w-full hover:bg-[#6E6E6E]"
-                    onClick={HandleLogout}
+                    onClick={() => handleLogOut()}
                   >
                     <div className="flex items-center p-4 justify-left w-full hover:bg-[#6E6E6E]">
                       <div className="pr-2">
@@ -283,7 +271,7 @@ function LandingNavbar() {
               <Link href="">
                 <button
                   className="border px-6 py-2 rounded hover:bg-white hover:text-black"
-                  onClick={HandleLogin}
+                  onClick={() => setShowAuthFlow(true)}
                 >
                   Launch App
                 </button>
@@ -312,8 +300,9 @@ function LandingNavbar() {
           )}
 
           <div
-            className={`delay-300 md:hidden text-center flex justify-center items-center gap-8 py-12 h-screen bg-black/70 w-full fixed top-[55px] text-white flex-col ${Toggle ? "right-[100%]" : "left-[100%]}"
-              }`}
+            className={`delay-300 md:hidden text-center flex justify-center items-center gap-8 py-12 h-screen bg-black/70 w-full fixed top-[55px] text-white flex-col ${
+              Toggle ? "right-[100%]" : "left-[100%]}"
+            }`}
           >
             <div className="flex flex-col gap-[2rem]  w-[80%]">
               <Link href="/">

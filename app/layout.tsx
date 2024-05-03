@@ -1,7 +1,7 @@
 "use client";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { RecoilRoot } from "recoil"
+
 import "./globals.css";
 
 
@@ -15,9 +15,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <RecoilRoot>
+   
           {children}
-        </RecoilRoot>
+
       </body>
     </html>
   );
