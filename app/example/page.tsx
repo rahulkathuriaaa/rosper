@@ -1,63 +1,116 @@
 "use client";
-
-import { useWeb3Auth } from "@/hooks/useWeb3Auth";
-import { IProvider } from "@web3auth/base";
+import { FC, FormEventHandler, useState } from "react";
+// 0x77929F1f2a404a6dEB38124E0E0c4d7F5500c595
 import { ethers } from "ethers";
-import { useState } from "react";
-const web3auth = useWeb3Auth;
+import {
+  Account,
+  Chain,
+  Hex,
+  Transport,
+  WalletClient,
+  PublicClient,
+  parseEther,
+} from "viem";
 
-export default function Home() {
-  const web3Auth = useWeb3Auth
-  const login = async () => {
-    // IMP START - Login
+import {
+  useDynamicContext,
+  DynamicContextProvider,
+  DynamicWidget,
+} from "@dynamic-labs/sdk-react-core";
+import { getChain } from "@dynamic-labs/utils";
+
+const SendTransactionSection: FC = () => {
+  const { primaryWallet } = useDynamicContext();
+
+  const [txnHash, setTxnHash] = useState("");
+  console.log(primaryWallet);
+
+  // if (!primaryWallet) return null;
+
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
+    const address = formData.get("address") as string;
+    const amount = formData.get("amount") as string;
+    const provider2 = await primaryWallet?.connector.getSigner<
+      WalletClient<Transport, Chain, Account>
+    >();
+    const provider = await primaryWallet.connector.ethers?.getSigner();
+
+    if (!provider) return;
+    const contractAddress = "0x77929F1f2a404a6dEB38124E0E0c4d7F5500c595"; // Your smart contract address
+    const contractAbi = [
+      {
+        inputs: [
+          {
+            internalType: "uint256",
+            name: "num",
+            type: "uint256",
+          },
+        ],
+        name: "store",
+        outputs: [],
+        stateMutability: "nonpayable",
+        type: "function",
+      },
+      {
+        inputs: [],
+        name: "retrieve",
+        outputs: [
+          {
+            internalType: "uint256",
+            name: "",
+            type: "uint256",
+          },
+        ],
+        stateMutability: "view",
+        type: "function",
+      },
+    ];
+    const functionName = "store";
+    const functionArguments = [12];
+
+    const contract = new ethers.Contract(
+      contractAddress,
+      contractAbi,
+      provider
+    );
     try {
-      await web3auth.initModal();
+      const tx = await contract[functionName](...functionArguments);
+      await tx.wait();
+      setTxnHash(tx.hash);
     } catch (error) {
-      console.log(error);
+      console.error("Transaction failed:", error);
     }
 
-    await web3auth.connect();
-    // IMP END - Login
-    if (web3auth.connected) {
-    }
+    const client =
+      await primaryWallet.connector.getPublicClient<PublicClient>();
+
+    // const { transactionHash } = await client.getTransactionReceipt({
+    //   txnHash,
+    // });
+    // setTxnHash(transactionHash);
   };
-  const contractABI = [
-    { inputs: [{ internalType: "string", name: "initMessage", type: "string" }], stateMutability: "nonpayable", type: "constructor" },
-    { inputs: [], name: "message", outputs: [{ internalType: "string", name: "", type: "string" }], stateMutability: "view", type: "function" },
-    {
-      inputs: [{ internalType: "string", name: "newMessage", type: "string" }],
-      name: "update",
-      outputs: [],
-      stateMutability: "nonpayable",
-      type: "function",
-    },
-  ];
-  const contractAddress = "0x04cA407965D60C2B39d892a1DFB1d1d9C30d0334";
-  const writeContract = async () => {
-    // const provider = await new ethers.providers.Web3Provider(web3auth.provider as IProvider)
-    // const signer = await provider.getSigner()
-    // const contract = new ethers.Contract(contractAddress, contractABI, signer)
-    // console.log(1)
-    // const receipt = await contract.methods.update("W3A").send({
-    //   from: (await web3.eth.getAccounts())[0],
-    // const  = await tx.wait()
-    // console.log("Write on blockchain", recipt)
-  }
-  const readContract = async () => {
-    const provider = await new ethers.providers.Web3Provider(web3auth.provider as IProvider)
-    const signer = await provider.getSigner()
-    const contract = await new ethers.Contract(contractAddress, contractABI, signer)
-    console.log(1)
-    const message = await contract.message();
-    console.log(message)
-  }
+
   return (
     <div>
-      <h1>This is example page</h1>
-      <button onClick={login} className="outline px-2 py-4">login</button>
-      <button onClick={writeContract} className="outline px-2 py-4">Write Contract</button>
-      <button onClick={readContract} className="outline px-2 py-4">Read Contract</button>
+      <form onSubmit={onSubmit}>
+        <p>Send to ETH address</p>
+        <input name="address" type="text" placeholder="Address" />
+        <input name="amount" type="text" placeholder="0.05" />
+        <button type="submit">Send</button>
+        <span data-testid="transaction-section-result-hash">{txnHash}</span>
+      </form>
+      <button
+        onClick={() => {
+          console.log(primaryWallet);
+        }}
+      >
+        check
+      </button>{" "}
     </div>
   );
-}
-
+};
+export default SendTransactionSection;
