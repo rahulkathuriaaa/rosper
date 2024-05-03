@@ -1,4 +1,4 @@
-// @ts-nocheck
+// @ts-nocheck 
 "use client";
 import { useState, useEffect } from "react";
 import Image from "next/image";
@@ -8,17 +8,14 @@ import CardsInfluencersForBrands from "../cards/CardsInfluencersForBrands";
 import CardsProductForBrands from "../cards/CardsProductForBrands";
 import { checkUserType } from "@/appwrite/utils";
 import appwriteService from "@/appwrite/config";
-import DiscountCodeGenerator from "./DiscountCodeGenerator";
-
 import {
   useBrandData,
   useInfluencerData,
   useIsInfluencer,
   usePublicKey,
 } from "@/store";
-import { useWeb3Auth } from "@/hooks/useWeb3Auth";
-import { ethers } from "ethers";
-import { IProvider } from "@web3auth/base";
+
+import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
 const DashHome = () => {
   const isInfluencer = useIsInfluencer((state) => state.isInfluencer);
   console.log(isInfluencer);
@@ -28,23 +25,10 @@ const DashHome = () => {
   const [userDescription, setUserDescription] = useState<string>();
   const [loading, setLoading] = useState(false);
   const [allBrands, setAllBrands] = useState();
-  const [walletAddress, setWalletAddress] = useState('')
   const [allInfluencers, setAllInfluencers] = useState();
   const [currentUserDocumentId, setCurrentUserDocumentId] = useState<string>();
+
   const description = useBrandData((state) => state.description);
-
-  useEffect(() => {
-
-    async function getWalletAddress() {
-
-      const Web3Auth = useWeb3Auth
-      const provider = await new ethers.providers.Web3Provider(Web3Auth.provider as IProvider)
-      const signer = await provider.getSigner()
-      const address = await signer.getAddress()
-      setWalletAddress(address)
-    }
-    getWalletAddress()
-  }, [])
   async function updateData(key: string) {
     const userType = await checkUserType(key);
     console.log(userType);
@@ -74,10 +58,10 @@ const DashHome = () => {
   useEffect(() => {
     updateData(key);
   }, []);
-  
 
-
+  const { user } = useDynamicContext();
   if (loading == true) return <>Fetching....</>;
+  const walletAddress = user?.verifiedCredentials[0].address;
   return (
     <div className="flex w-[98%] py-4">
       <div className="flex flex-col justify-center items-center gap-8 w-full">
@@ -262,7 +246,6 @@ const DashHome = () => {
                 <p>Invalid data format for influencers.</p>
               ))}
           </div>
-          {/* <DiscountCodeGenerator></DiscountCodeGenerator> */}
         </div>
       </div>
     </div>

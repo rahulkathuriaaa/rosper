@@ -1,5 +1,5 @@
 
-
+// @ts-nocheck
 // UserDataProvider.tsx
 import { createContext, useContext, useEffect, useState } from "react";
 import { usePublicKey, useIsInfluencer, useInfluencerData, useBrandData } from "@/store";

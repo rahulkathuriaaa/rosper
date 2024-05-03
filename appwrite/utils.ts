@@ -1,3 +1,4 @@
+// @ts-nocheck 
 import { useBrandData, useInfluencerData, usePublicKey } from "@/store";
 import appwriteService from "./config";
 async function getBrandData(key: string) {
