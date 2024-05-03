@@ -56,6 +56,6 @@ export async function POST(req, res) {
     console.error("Error creating discount code:", error.response.body);
     res
       .status(500)
-      .json({ error: "An error occurred while creating the discount code." });
+      .json({ error: "An error occurred while creating  discount code." });
   }
 }
