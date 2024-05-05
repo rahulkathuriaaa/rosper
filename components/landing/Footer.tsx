@@ -42,7 +42,7 @@ function Footer() {
                 name="email"
                 id="mail"
                 placeholder="Email Address"
-                className="outline-none p-3 w-[80%] rounded-l-md"
+                className="outline-none p-3 w-[80%] rounded-l-md text-black"
               />
               <div className="w-[20%] flex justify-center items-center">
                 <Image

@@ -45,7 +45,7 @@ function AccountSetting() {
         </div>
       </div>
 
-      <div className="w-[80%] flex flex-col gap-4">
+      <div className="w-[70%] flex flex-col gap-4">
         <div className="p-6 rounded-lg bg-[#2D2D2D] flex justify-between items-center">
           <div>
             <p className="text-white text-xl font-semibold">Password</p>
@@ -53,7 +53,7 @@ function AccountSetting() {
               You signed up via Google, so you don&#39;t have a password.
             </p>
           </div>
-          <button className="bg-[#00B24F] p-3 text-lg text-white rounded-xl w-[14%]">
+          <button className="bg-[#00B24F] py-2 px-1 text-white rounded-xl w-[14%]">
             Change
           </button>
         </div>

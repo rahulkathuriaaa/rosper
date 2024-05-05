@@ -1,4 +1,6 @@
-import React from "react";
+"use client";
+import { useState } from "react";
+import ViewCampaign from "../dashboard/ViewCampaign";
 
 const CardsPastCampaigns = ({
   campaign,
@@ -13,6 +15,7 @@ const CardsPastCampaigns = ({
   balance: any;
   total: any;
 }) => {
+  const [view, setView] = useState(true);
   return (
     <div className="w-full">
       <div className="w-full flex flex-col gap-2 p-4 text-white bg-[#6D7171] rounded-t-xl">
@@ -46,9 +49,17 @@ const CardsPastCampaigns = ({
           </div>
         </div>
         <div>
-          <p className="text-[#27E0A6]">View Campaign</p>
+          <button
+            className={`text-[#27E0A6]`}
+            onClick={() => {
+              setView(false);
+            }}
+          >
+            View Campaign
+          </button>
         </div>
       </div>
+      {view ? "" : <ViewCampaign />}
     </div>
   );
 };
