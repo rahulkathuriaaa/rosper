@@ -10,7 +10,7 @@ function InfAccountSettings() {
             type="text"
             id="event-name"
             placeholder="Peter Griffin"
-            className="bg-[#27292D] rounded-xl p-3 text-white  w-[50%]"
+            className="bg-[#27292D] outline-none rounded-xl p-3 text-white  w-[50%]"
           />
         </div>
 
@@ -20,7 +20,7 @@ function InfAccountSettings() {
             type="text"
             id="event-name"
             placeholder="Peterdactyl2015"
-            className="bg-[#27292D] rounded-xl p-3 text-white  w-[50%]"
+            className="bg-[#27292D] outline-none rounded-xl p-3 text-white  w-[50%]"
           />
         </div>
 
@@ -30,7 +30,7 @@ function InfAccountSettings() {
             type="text"
             id="event-name"
             placeholder="hello@designdrops.io"
-            className="bg-[#27292D] rounded-xl p-3 text-white  w-[50%]"
+            className="bg-[#27292D] outline-none rounded-xl p-3 text-white  w-[50%]"
           />
         </div>
 
@@ -40,7 +40,7 @@ function InfAccountSettings() {
             type="text"
             id="event-name"
             placeholder=""
-            className="bg-[#27292D] rounded-xl p-3 text-white  w-[50%]"
+            className="bg-[#27292D] outline-none rounded-xl p-3 text-white  w-[50%]"
           />
         </div>
       </div>
