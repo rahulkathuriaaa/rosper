@@ -1,4 +1,4 @@
-export const ContractAddressReferFactory = "0xa7cEEa387aa11D9520BA605861E4a30289Eeee72"
+export const ContractAddressReferFactory = "0x6DE3E2C4C564F3043387171965471520595255e8"
 export const AbiReferFactory =
     [
         {
