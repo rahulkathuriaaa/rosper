@@ -362,7 +362,7 @@ export const tokenContractAbi = [
 ];
 
 export const referFactoryContractAddress =
-  "0x091bbaE7E69d5c73572c94a9971c5fA0B68c89F3";
+  "0x9Dde0dbD80114F5912eb7A6147253C091E404864";
 export const referFactoryContractAbi = [
   {
     inputs: [],

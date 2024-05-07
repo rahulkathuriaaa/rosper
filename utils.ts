@@ -117,18 +117,20 @@ export async function generateWelcomeEmail(id: string) {
   }
 }
 
-export async function generateDiscountCode(percentage: number, code: string) {
+export async function generateDiscountCode(percentage: number, code: string,accessToken:string,shopName:string) {
   try {
     const response = await fetch("/api/codeGen", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ percentage: percentage, code: code }),
+      body: JSON.stringify({ percentage: percentage, code: code,accessToken:accessToken,shopName:shopName }),
     });
     console.log(response);
     if (response.ok) {
       const data = await response.json();
+      console.log(data)
+      return data
     } else {
       console.log("An error occurred while creating the discount code.");
     }

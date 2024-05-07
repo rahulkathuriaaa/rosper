@@ -4,6 +4,9 @@ import ViewCampaign from "../dashboard/ViewCampaign";
 import WhitelistInfluencer from "../dashboard/WhitelistInfluencer";
 import { ethers } from "ethers";
 import { useDynamicContext } from "@dynamic-labs/sdk-react-core";
+import { useIsInfluencer } from "@/store";
+import ReferalCode from "@/components/dashboard/ReferalCode";
+
 import {
   counterContractAbi,
   counterContractAddress,
@@ -36,7 +39,7 @@ const CardsActiveCampaigns = ({
   const [remainingBalance, setRemainingBalance] = useState();
   const [allBrands, setAllBrands] = useState();
   const [allInfluencers, setAllInfluencers] = useState();
-
+  const isInfluencer = useIsInfluencer.getState().isInfluencer;
   const { primaryWallet } = useDynamicContext();
   const { user } = useDynamicContext();
 
@@ -120,14 +123,18 @@ const CardsActiveCampaigns = ({
           </div>
         </div>
         <div className="flex items-center gap-6">
-          <button
-            className={`text-[#27E0A6]`}
-            onClick={() => {
-              setWhitelist(false);
-            }}
-          >
-            Whitelist Influencer
-          </button>
+          {!isInfluencer ? (
+            <button
+              className={`text-[#27E0A6]`}
+              onClick={() => {
+                setWhitelist(false);
+              }}
+            >
+              Whitelist Influencer
+            </button>
+          ) : (
+            <ReferalCode ></ReferalCode>
+          )}
           <button
             className={`text-[#27E0A6]`}
             onClick={() => {
@@ -142,7 +149,10 @@ const CardsActiveCampaigns = ({
       {whitelist ? (
         ""
       ) : (
-        <WhitelistInfluencer addresses={allInfluencers} camapignAddresses={address} />
+        <WhitelistInfluencer
+          addresses={allInfluencers}
+          camapignAddresses={address}
+        />
       )}
     </div>
   );

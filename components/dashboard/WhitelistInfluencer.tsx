@@ -67,7 +67,7 @@ function WhitelistInfluencer(
               </div>
             </div>
             {addresses?.addresses?.documents.map((infAdd) => (
-              <div>
+              <div key={infAdd}>
                 {
                   <CardsWhitelistInfluencer
                     key={infAdd}
