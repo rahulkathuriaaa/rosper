@@ -67,9 +67,9 @@ function Footer() {
         <div className="flex justify-between items-center flex-col sm:flex-row gap-6 sm:gap-3">
           <div className="flex justify-center sm:justify-normal items-center">
             <Image
-              src="/rosper-logo.png"
-              width="252"
-              height="300"
+              src="/rosper-footer.png"
+              width="150"
+              height="200"
               className="w-[70%]"
               alt="Ref3r logo"
             />
