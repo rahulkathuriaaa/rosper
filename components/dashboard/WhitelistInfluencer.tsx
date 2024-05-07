@@ -2,7 +2,14 @@ import React from "react";
 import Image from "next/image";
 import CardsWhitelistInfluencer from "../cards/CardsWhitelistInfluencer";
 
-function WhitelistInfluencer() {
+function WhitelistInfluencer(
+  addresses = addresses,
+  camapignAddresses = camapignAddresses
+) {
+  console.log("from whilelist page");
+//  console.log(addresses.addresses.documents[0].name);
+  console.log(addresses.camapignAddresses);
+
   return (
     <>
       <div className="w-[98%] flex flex-col gap-10 py-6 pl-4">
@@ -59,15 +66,19 @@ function WhitelistInfluencer() {
                 </p>
               </div>
             </div>
-
-            <CardsWhitelistInfluencer
-              image={"/icons/ProfileIcon.svg"}
-              name="Jane Cooper"
-            />
-            <CardsWhitelistInfluencer
-              image={"/icons/ProfileIcon.svg"}
-              name="Jane Cooper"
-            />
+            {addresses?.addresses?.documents.map((infAdd) => (
+              <div>
+                {
+                  <CardsWhitelistInfluencer
+                    key={infAdd}
+                    campaignAddress={addresses.camapignAddresses}
+                    influencerAddress={infAdd.publicKey}
+                    image={"/icons/ProfileIcon.svg"}
+                    name={infAdd.name}
+                  />
+                }
+              </div>
+            ))}
 
             <div className="w-full bg-[#2D2D2D] px-6 py-3 flex items-center justify-center text-center rounded-b-xl">
               <p className="text-gray-400">Showing 6 of 6 people</p>

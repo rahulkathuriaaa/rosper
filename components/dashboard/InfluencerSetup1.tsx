@@ -3,15 +3,19 @@ import { useState } from "react";
 import Image from "next/image";
 import InfluencerSetup2 from "./InfluencerSetup2";
 import { useInfluencerData } from "@/store";
+import { useDynamicContext } from "@/lib/dynamic";
 
 function InfluencerSetup1() {
   const [choose, setChoose] = useState(true);
   const [name, setName] = useState<string>();
   const [bio, setBio] = useState<string>();
+  const { user, isAuthenticated, setShowAuthFlow, handleLogOut } =
+  useDynamicContext();
   function updateStore() {
     useInfluencerData.setState({
       name: name,
       bio: bio,
+      publicKey:user?.verifiedCredentials[1].address,
     });
   }
   return (

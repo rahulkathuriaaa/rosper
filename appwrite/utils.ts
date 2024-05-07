@@ -1,4 +1,4 @@
-// @ts-nocheck 
+// @ts-nocheck
 import { useBrandData, useInfluencerData, usePublicKey } from "@/store";
 import appwriteService from "./config";
 async function getBrandData(key: string) {
@@ -35,6 +35,7 @@ export async function createInfluencer() {
     niche: useInfluencerData.getState().niche,
     main_platform: useInfluencerData.getState().main_platform,
     follower_count: useInfluencerData.getState().follower_count,
+    publicKey: useInfluencerData.getState().publicKey,
   };
   appwriteService.createInfluencer(influencerData);
 }
@@ -53,6 +54,7 @@ export async function createBrand() {
     api_key: useBrandData.getState().api_key,
     industry: useBrandData.getState().industry,
     profile_img: useBrandData.getState().profile_img,
+    publicKey: useBrandData.getState().publicKey,
   };
   const data = await appwriteService.createBrand(brandData);
   console.log(data);

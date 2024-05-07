@@ -1,4 +1,4 @@
-// @ts-nocheck 
+// @ts-nocheck
 "use client";
 import { FC, FormEventHandler, useState } from "react";
 // 0x77929F1f2a404a6dEB38124E0E0c4d7F5500c595
@@ -18,7 +18,7 @@ import {
   DynamicContextProvider,
   DynamicWidget,
 } from "@dynamic-labs/sdk-react-core";
-import { getChain } from "@dynamic-labs/utils";
+import { contractAddress, contractAbi } from "@/ethers/contractConfig";
 
 const SendTransactionSection: FC = () => {
   const { primaryWallet } = useDynamicContext();
@@ -41,37 +41,9 @@ const SendTransactionSection: FC = () => {
     const provider = await primaryWallet.connector.ethers?.getSigner();
 
     if (!provider) return;
-    const contractAddress = "0x77929F1f2a404a6dEB38124E0E0c4d7F5500c595"; // Your smart contract address
-    const contractAbi = [
-      {
-        inputs: [
-          {
-            internalType: "uint256",
-            name: "num",
-            type: "uint256",
-          },
-        ],
-        name: "store",
-        outputs: [],
-        stateMutability: "nonpayable",
-        type: "function",
-      },
-      {
-        inputs: [],
-        name: "retrieve",
-        outputs: [
-          {
-            internalType: "uint256",
-            name: "",
-            type: "uint256",
-          },
-        ],
-        stateMutability: "view",
-        type: "function",
-      },
-    ];
+
     const functionName = "store";
-    const functionArguments = [12];
+    const functionArguments = [13];
 
     const contract = new ethers.Contract(
       contractAddress,

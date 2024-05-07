@@ -30,7 +30,7 @@ const ViewCampaign = () =>
           </div>
 
           <div>
-            <button className="text-sm py-2 px-4 rounded-lg text-white bg-[#00B24F] flex justify-center items-center gap-2">
+            {/* <button className="text-sm py-2 px-4 rounded-lg text-white bg-[#00B24F] flex justify-center items-center gap-2">
               <Image
                 src="/icons/Edit.svg"
                 width="25"
@@ -39,7 +39,7 @@ const ViewCampaign = () =>
                 className=""
               />
               Edit Campaign
-            </button>
+            </button> */}
           </div>
         </div>
 

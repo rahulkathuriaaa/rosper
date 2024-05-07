@@ -71,8 +71,9 @@ function LandingNavbar() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      console.log("user payload data", user?.email);
-
+      // console.log("user payload data", user?.email);
+      console.log("user objh");
+     // console.log(user?.verifiedCredentials[1].address);
       usePublicKey.setState({ publicKey: user?.email });
       const key = usePublicKey.getState().publicKey;
       console.log(key);
@@ -99,7 +100,7 @@ function LandingNavbar() {
   const handleClick = () => {
     setToggle(!Toggle);
   };
-
+  // /publicKey
   return (
     <div className="w-full flex justify-center items-center">
       <nav className="z-10 md:bg-[#4A4A4A] mt-2 md:mt-10 w-[90%] rounded-md items-center justify-between text-[0.75rem] lg:text-sm font-semibold text-white flex">

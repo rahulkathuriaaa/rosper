@@ -74,6 +74,7 @@ export async function checkUserSetup(key: string) {
       industry: brandData.documents[0].industry,
       profile_img: brandData.documents[0].profile_img,
       connections: brandData.documents[0].connections,
+      publicKey: brandData.documents[0].publicKey,
     });
   }
 
@@ -93,6 +94,7 @@ export async function checkUserSetup(key: string) {
       main_platform: influencerData.documents[0].main_platform,
       follower_count: influencerData.documents[0].follower_count,
       connections: influencerData.documents[0].connections,
+      publicKey: influencerData.documents[0].publicKey,
     });
   }
 

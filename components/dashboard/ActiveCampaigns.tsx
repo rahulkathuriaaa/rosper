@@ -1,30 +1,24 @@
+"use client";
 import React from "react";
 import CardsActiveCampaigns from "../cards/CardsActiveCampaigns";
 
-function ActiveCampaigns() {
+function ActiveCampaigns(campaigns: any) {
+  console.log(campaigns.campaigns);
+
   return (
     <div className="flex flex-col gap-4">
-      <CardsActiveCampaigns
-        campaign="Campaign 1"
-        campaigndesc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident consequatur maxime magnam, ipsum, voluptates odit iusto autem quod, dolorum voluptate sunt suscipit dolor. Maxime, facilis."
-        number={"30"}
-        balance={"20"}
-        total={"200"}
-      />
-      <CardsActiveCampaigns
-        campaign="Campaign 2"
-        campaigndesc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident consequatur maxime magnam, ipsum, voluptates odit iusto autem quod, dolorum voluptate sunt suscipit dolor. Maxime, facilis."
-        number={"50"}
-        balance={"20"}
-        total={"200"}
-      />
-      <CardsActiveCampaigns
-        campaign="Campaign 3"
-        campaigndesc="Lorem ipsum dolor, sit amet consectetur adipisicing elit. Provident consequatur maxime magnam, ipsum, voluptates odit iusto autem quod, dolorum voluptate sunt suscipit dolor. Maxime, facilis."
-        number={"40"}
-        balance={"20"}
-        total={"200"}
-      />
+      {campaigns.campaigns.map((campaign, index) => (
+        <CardsActiveCampaigns
+          key={index}
+          address={campaign[0]}
+          campaign={campaign[4]}
+          campaigndesc={campaign[5]}
+          // number={"30"}
+          balance={"20"}
+          total={"200"}
+        />
+      ))}
+      ;
     </div>
   );
 }

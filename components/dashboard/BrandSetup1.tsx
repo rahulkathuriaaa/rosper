@@ -3,6 +3,7 @@ import { useState } from "react";
 import Image from "next/image";
 import BrandSetup2 from "./BrandSetup2";
 import { useBrandData } from "@/store";
+import { useDynamicContext } from "@/lib/dynamic";
 
 function BrandSetup1() {
   const [choose, setChoose] = useState(true);
@@ -11,6 +12,8 @@ function BrandSetup1() {
   const [brandWebsite, setBrandWebsite] = useState<string>();
   const [brandAddress, setBrandAddress] = useState<string>();
   const [brandRegistrationCode, setBrandRegistrationCode] = useState<string>();
+  const { user, isAuthenticated, setShowAuthFlow, handleLogOut } =
+    useDynamicContext();
   function updateStore() {
     useBrandData.setState({
       name: brandName,
@@ -18,6 +21,7 @@ function BrandSetup1() {
       website: brandWebsite,
       address: brandAddress,
       business_reg_code: brandRegistrationCode,
+      publicKey: user?.verifiedCredentials[1].address,
     });
     console.log("store Updated 1");
   }
