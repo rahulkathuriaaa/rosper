@@ -106,7 +106,7 @@ function LandingNavbar() {
       <nav className="z-10 md:bg-[#4A4A4A] mt-2 md:mt-10 w-[90%] rounded-md items-center justify-between text-[0.75rem] lg:text-sm font-semibold text-white flex">
         <Link href="/" className="md:w-[10%]">
           <Image
-            src="/refer-logo.png"
+            src="/rosper-logo.png"
             width="252"
             height="300"
             className="w-[70%] md:w-[60%] md:ml-4 my-2"

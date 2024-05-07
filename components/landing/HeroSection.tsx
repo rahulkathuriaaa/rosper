@@ -63,21 +63,23 @@ function Hero() {
 
       <div className="relative z-1 flex flex-col justify-center items-center w-full mt-12 md:mt-32">
         <p className="text-white font-bold text-2xl md:text-5xl text-center w-[70%]">
-          <span className="text-[#61BC84]">Ref3r</span> Connecting influencers
-          and brands for seamless collaborations
+          <span className="text-[#61BC84]">Rosper</span> Democratizing the social media marketplace
         </p>
         <p className="text-white font-semibold mt-10 md:text-xl w-[60%] md:w-[45%] text-center">
-          Our unique platform features automate commissions and streamline
-          influencer sponsorship.
+        Effective and efficient marketing platform for brands and influencers, of all kinds. 
+
         </p>
 
         <div className="flex flex-col md:flex-row gap-8 md:gap-12 w-[85%] md:w-[75%] justify-center items-center md:items-end mt-20 mb-20 md:mb-10">
           <div className="flex justify-center items-center bg-[#2D2D2D] md:w-[50%] rounded-3xl md:rounded-2xl p-5 md:p-8">
             <div className="text-white w-[65%] text-center">
-              <p className="md:text-[1.5rem] font-bold">For Reference</p>
+              <p className="md:text-[1.5rem] font-bold">Influencer</p>
               <p className="text-[0.5rem] text-[#909090] md:text-xs font-bold">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+              Land your first paid collaboration with Rosper
+              <br/>
+              With our help, get paid for the hard work you put in your content and attract the recognition you deserve. 
+
+
               </p>
             </div>
 
@@ -92,8 +94,8 @@ function Hero() {
             <div className="text-white text-center w-[65%]">
               <p className="md:text-[1.5rem] font-bold">For Brands</p>
               <p className="text-[0.5rem] md:text-xs font-semibold text-[#909090] md:text-white">
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+              Let your marketing budget be used to its fullest potential with actual engaging content. 
+
               </p>
             </div>
 
